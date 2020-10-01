@@ -11,10 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import shop.dongguktime.web.command.Command;
 
-/**
- * Servlet implementation class FrontController
- */
-@WebServlet("/FrontController")
+
+@WebServlet("/*.do")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -48,7 +46,6 @@ public class FrontController extends HttpServlet {
 		String context = uri.substring(conPath.length());
 		
 		// context에 다른 분기 
-		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

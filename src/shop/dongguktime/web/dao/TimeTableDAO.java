@@ -23,7 +23,7 @@ public class TimeTableDAO {
 	private Statement statement;
 	private ResultSet resultSet;
 	
-	//db ¿¬µ¿ 
+	
 	private TimeTableDAO() {
 		
 		try	{

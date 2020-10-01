@@ -22,7 +22,7 @@ public class MemberDAO {
 	private ResultSet resultSet;
 	private PreparedStatement prestat;
 	
-	//db 연동 
+	
 	private MemberDAO() {
 		
 		try	{
@@ -38,7 +38,7 @@ public class MemberDAO {
 		return dao;
 	}
 	
-	public boolean existsId (String id) { // 아이디 중복체크
+	public boolean existsId (String id) {
 		
 		boolean duplication = false;
 		
@@ -72,7 +72,7 @@ public class MemberDAO {
 		return duplication;
 	}
 	
-	public MemberDTO getMembersFromId(String m_id) { //id로 유저정보 획득
+	public MemberDTO getMembersFromId(String m_id) {
 		 
 		MemberDTO dto = null;
 		
@@ -159,7 +159,7 @@ public class MemberDAO {
 		
 	}
 	
-	public boolean ModifyMembers (MemberDTO dto) { // 사용자 정보 수정
+	public boolean ModifyMembers (MemberDTO dto) { 
 		
 		boolean modifyResult = false;
 		

@@ -44,8 +44,7 @@ public class FrontController extends HttpServlet {
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
 		String context = uri.substring(conPath.length());
-		
-		// context�� �ٸ� �б� 
+	
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

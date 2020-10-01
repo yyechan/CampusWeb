@@ -6,7 +6,7 @@ public class MemberDTO {
 	private String id;
 	private String pw;
 	private String eMail;
-	private boolean isAuthenticated; // 학교 인증 여부 
+	private boolean isAuthenticated;
 	
 	public MemberDTO(String id, String pw,String eMail,boolean isAuthenticated) {
 		this.id = id;

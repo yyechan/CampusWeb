@@ -119,7 +119,47 @@ public class MemberDAO {
 		return dto;
 	}
 	
-	
+	public boolean InsertMembers(MemberDTO dto) {
+		
+		boolean insertResult = false;
+		
+		
+		try
+		{
+			connection = dataSource.getConnection();
+			String query = "insert into members values (?,?,?,?)";
+			prestat = connection.prepareStatement(query);
+			
+			prestat.setString(1, dto.getId());
+			prestat.setString(2, dto.getPw());
+			prestat.setString(3, dto.geteMail());
+			prestat.setBoolean(4, dto.getIsAuthenticated());
+		
+			prestat.executeUpdate();
+			
+			insertResult = true;
+			
+			
+		}catch(Exception e)		{
+			
+			System.out.println(e.toString());
+			
+		}
+		finally	{
+			
+			try {
+				if(!prestat.isClosed()) prestat.close();
+				if(!connection.isClosed()) connection.close();
+			}
+			catch(Exception e) {
+				System.out.println(e.toString());
+			}
+		}
+		
+		
+		return insertResult;
+		
+	}
 	
 
 }

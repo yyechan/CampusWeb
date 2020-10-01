@@ -39,7 +39,7 @@ public class MemberDTO {
 		this.eMail = eMail;
 	}
 
-	public boolean isAuthenticated() {
+	public boolean getIsAuthenticated() {
 		return isAuthenticated;
 	}
 

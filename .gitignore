@@ -1,0 +1,23 @@
+### Java ###
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+#Project files
+.classpath
+.project
+.settings/
+
+
+# Package Files #
+
+
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar

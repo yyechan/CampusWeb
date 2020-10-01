@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import shop.dongguktime.web.command.Command;
 
 
-@WebServlet("/*.do")
+@WebServlet("/tttttt")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -45,7 +45,7 @@ public class FrontController extends HttpServlet {
 		String conPath = request.getContextPath();
 		String context = uri.substring(conPath.length());
 		
-		// context¿¡ ´Ù¸¥ ºÐ±â 
+		// contextï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½Ð±ï¿½ 
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

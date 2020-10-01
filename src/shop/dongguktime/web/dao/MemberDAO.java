@@ -23,24 +23,50 @@ public class MemberDAO {
 	private PreparedStatement prestat;
 	
 	//db ¿¬µ¿ 
-	private MemberDAO()
-	{
+	private MemberDAO() {
 		
-		try
-		{
+		try	{
 			Context context = new InitialContext();
 			dataSource = (DataSource)context.lookup("java:comp/env/jdbc/orcl");
 		
-		}catch(Exception e)
-		{
+		}catch(Exception e) {
 			System.out.println(e.toString());
 		}
-		
-	
-
 	}
 	
-	
+	public boolean existsID (String id) {
+		
+		boolean duplication = false;
+		
+		try {
+			
+			connection = dataSource.getConnection();
+			statement = connection.createStatement();
+			String query = "select id from members where id = '" + id + "'";
+			resultSet = statement.executeQuery(query);
+			
+			if(resultSet.next()) 
+				duplication = true;
+			else 
+				duplication = false;
+				
+		}catch (Exception e) {
+			System.out.println(e.toString());
+		}finally {
+			
+			try {
+				if(!connection.isClosed()) connection.close();
+				if(!statement.isClosed()) statement.close();
+				if(!resultSet.isClosed()) resultSet.close();
+			}
+			catch(Exception e) {
+				System.out.println(e.toString());
+			}	
+		}
+		
+		
+		return duplication;
+	}
 	
 	
 	

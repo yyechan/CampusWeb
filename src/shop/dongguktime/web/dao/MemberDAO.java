@@ -161,5 +161,45 @@ public class MemberDAO {
 		
 	}
 	
+	public boolean ModifyMembers (MemberDTO dto) { // 사용자 정보 수정
+		
+		boolean modifyResult = false;
+		
+		try {
+			
+			connection = dataSource.getConnection();
+			String query = "update members set pw = ?, eMail = ?, isAuthenticated = ? where id = ?";
+			prestat = connection.prepareStatement(query);
+			
+			prestat.setString(1, dto.getPw());
+			prestat.setString(2, dto.geteMail());
+			prestat.setBoolean(3,dto.getIsAuthenticated());
+			prestat.setString(4,dto.getId());
+		
+			int cnt = prestat.executeUpdate();
+			
+			if(cnt>0) {
+				modifyResult = true;
+			}
+			
+		}catch(Exception e) {
+			
+			System.out.println(e.toString());
+			
+		}finally {
+			
+			try {
+				if(!prestat.isClosed()) prestat.close();
+				if(!connection.isClosed()) connection.close();
+			}catch(Exception e) {
+				System.out.println(e.toString());
+			}
+			
+		}
+		
+		return modifyResult;
+		
+	}
+	
 
 }

@@ -54,19 +54,19 @@ public class TimeTableDAO {
 			if(keywords=="") {
 				query = "select * from timetable";
 			}else {
-				query = "select * from timetable where courseName = '" + keywords + "'";
+				query = "select * from timetable where className = '" + keywords + "'";
 			}
 			resultSet = statement.executeQuery(query);
 			
 			
 			while(resultSet.next()) {
 				
-				String courseNum = resultSet.getString("courseNum");
-				String courseName = resultSet.getString("courseName");
-				String courseTime = resultSet.getString("courseTime");
-				String courseLecturer = resultSet.getString("courseLecturer");
-				String courseLocation = resultSet.getString("courseLocation");
-				int courseScore = resultSet.getInt("courseScore");
+				String courseNum = resultSet.getString("classId");
+				String courseName = resultSet.getString("className");
+				String courseTime = resultSet.getString("dayOfWeekTime");
+				String courseLecturer = resultSet.getString("professorName");
+				String courseLocation = resultSet.getString("classLocation");
+				int courseScore = resultSet.getInt("classScore");
 				
 				TimeTableDTO dto = new TimeTableDTO(courseNum, courseName, courseTime, courseLecturer, courseLocation, courseScore);
 				

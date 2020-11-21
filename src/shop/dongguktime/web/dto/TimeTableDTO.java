@@ -2,72 +2,72 @@ package shop.dongguktime.web.dto;
 
 public class TimeTableDTO {
 	
-	private String courseNum;
-	private String courseName;
-	private String courseTime;
-	private String courseLecturer;
-	private String courseLocation;
-	private int courseScore;
+	private String classId;
+	private String className;
+	private String professorName;
+	private String dayOfWeekTime;
+	private String classLocation;
+	private int classScore;
 	
-	public TimeTableDTO(String courseNum, String courseName, String courseTime, String courseLecturer,
-			String courseLocation, int courseScore) {
+	
+	
+	
+	public TimeTableDTO(String classId, String className, String professorName, String dayOfWeekTime,
+			String classLocation, int classScore) {
 		
-		this.courseNum = courseNum;
-		this.courseName = courseName;
-		this.courseTime = courseTime;
-		this.courseLecturer = courseLecturer;
-		this.courseLocation = courseLocation;
-		this.courseScore = courseScore;
+		this.classId = classId;
+		this.className = className;
+		this.professorName = professorName;
+		this.dayOfWeekTime = dayOfWeekTime;
+		this.classLocation = classLocation;
+		this.classScore = classScore;
 	}
-
-	public String getCourseNum() {
-		return courseNum;
+	
+	
+	
+	public String getClassId() {
+		return classId;
 	}
-
-	public void setCourseNum(String courseNum) {
-		this.courseNum = courseNum;
+	public void setClassId(String classId) {
+		this.classId = classId;
 	}
-
-	public String getCourseName() {
-		return courseName;
+	public String getClassName() {
+		return className;
 	}
-
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
+	public void setClassName(String className) {
+		this.className = className;
 	}
-
-	public String getCourseTime() {
-		return courseTime;
+	public String getProfessorName() {
+		return professorName;
 	}
-
-	public void setCourseTime(String courseTime) {
-		this.courseTime = courseTime;
+	public void setProfessorName(String professorName) {
+		this.professorName = professorName;
 	}
-
-	public String getCourseLecturer() {
-		return courseLecturer;
+	public String getDayOfWeekTime() {
+		return dayOfWeekTime;
 	}
-
-	public void setCourseLecturer(String courseLecturer) {
-		this.courseLecturer = courseLecturer;
+	public void setDayOfWeekTime(String dayOfWeekTime) {
+		this.dayOfWeekTime = dayOfWeekTime;
 	}
-
-	public String getCourseLocation() {
-		return courseLocation;
+	public String getClassLocation() {
+		return classLocation;
 	}
-
-	public void setCourseLocation(String courseLocation) {
-		this.courseLocation = courseLocation;
+	public void setClassLocation(String classLocation) {
+		this.classLocation = classLocation;
 	}
-
-	public int getCourseScore() {
-		return courseScore;
+	public int getClassScore() {
+		return classScore;
 	}
-
-	public void setCourseScore(int courseScore) {
-		this.courseScore = courseScore;
+	public void setClassScore(int classScore) {
+		this.classScore = classScore;
 	}
-
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

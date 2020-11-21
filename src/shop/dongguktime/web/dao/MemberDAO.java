@@ -38,7 +38,7 @@ public class MemberDAO {
 		return dao;
 	}
 	
-	public boolean existsId (String id) {
+	public boolean isExistedId (String id) {
 		
 		boolean duplication = false;
 		
@@ -90,9 +90,10 @@ public class MemberDAO {
 				String id = resultSet.getString("id");
 				String pw = resultSet.getString("pw");
 				String eMail = resultSet.getString("eMail");
+				String name = resultSet.getString("name");
 				boolean isAuthenticated = resultSet.getBoolean("isAuthenticated");
 				
-				dto = new MemberDTO(id,pw,eMail,isAuthenticated);
+				dto = new MemberDTO(id,pw,name,eMail,isAuthenticated);
 				
 			}
 			
@@ -130,8 +131,9 @@ public class MemberDAO {
 			
 			prestat.setString(1, dto.getId());
 			prestat.setString(2, dto.getPw());
-			prestat.setString(3, dto.geteMail());
-			prestat.setBoolean(4, dto.getIsAuthenticated());
+			prestat.setString(3, dto.getName());
+			prestat.setString(4, dto.geteMail());
+			prestat.setBoolean(5, dto.getIsAuthenticated());
 		
 			prestat.executeUpdate();
 			

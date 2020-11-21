@@ -5,9 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class SHA256 {
 	
-	
-
-	public String encrypt(String str) {
+	public static String encrypt(String str) {
 		
 		String sha256 = "";
 		
@@ -25,8 +23,6 @@ public class SHA256 {
 			System.out.println("Encrypt Error");
 			sha256 = null;
 		}
-			
-		
 		
 		return sha256;
 	}

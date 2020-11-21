@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import shop.dongguktime.web.command.Command;
+import shop.dongguktime.web.command.*;
 
 
-@WebServlet("/tttttt")
+@WebServlet("*.do")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -44,7 +44,22 @@ public class FrontController extends HttpServlet {
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
 		String context = uri.substring(conPath.length());
-	
+		
+		if(context.equals("/login.do")) {
+			command = new loginCommand();
+			command.execute(request, response);
+			viewPage = "mainView.jsp";
+		}else if(context.equals("/logout.do")) {
+			command = new logoutCommand();
+			command.execute(request, response);
+			viewPage = "mainView.jsp";
+		}else if(context.equals("/signup.do")) {
+			command = new signupCommand();
+			command .execute(request, response);
+			viewPage = "mainView.jsp";
+		}
+		
+		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

@@ -7,9 +7,9 @@ public class MemberDTO {
 	private String pw;
 	private String name;
 	private String eMail;
-	private boolean isAuthenticated;
+	private int isAuthenticated;
 	
-	public MemberDTO(String id, String pw,String name, String eMail,boolean isAuthenticated) {
+	public MemberDTO(String id, String pw,String name, String eMail,int isAuthenticated) {
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
@@ -50,11 +50,11 @@ public class MemberDTO {
 		this.eMail = eMail;
 	}
 
-	public boolean getIsAuthenticated() {
+	public int getIsAuthenticated() {
 		return isAuthenticated;
 	}
 
-	public void setAuthenticated(boolean isAuthenticated) {
+	public void setAuthenticated(int isAuthenticated) {
 		this.isAuthenticated = isAuthenticated;
 	}
 	

@@ -91,7 +91,7 @@ public class MemberDAO {
 				String pw = resultSet.getString("pw");
 				String eMail = resultSet.getString("eMail");
 				String name = resultSet.getString("name");
-				boolean isAuthenticated = resultSet.getBoolean("isAuthenticated");
+				int isAuthenticated = resultSet.getInt("isAuthenticated");
 				
 				dto = new MemberDTO(id,pw,name,eMail,isAuthenticated);
 				
@@ -126,14 +126,14 @@ public class MemberDAO {
 		try
 		{
 			connection = dataSource.getConnection();
-			String query = "insert into members values (?,?,?,?)";
+			String query = "insert into members values (?,?,?,?,?)";
 			prestat = connection.prepareStatement(query);
 			
 			prestat.setString(1, dto.getId());
 			prestat.setString(2, dto.getPw());
 			prestat.setString(3, dto.getName());
 			prestat.setString(4, dto.geteMail());
-			prestat.setBoolean(5, dto.getIsAuthenticated());
+			prestat.setInt(5, dto.getIsAuthenticated());
 		
 			prestat.executeUpdate();
 			
@@ -173,7 +173,7 @@ public class MemberDAO {
 			
 			prestat.setString(1, dto.getPw());
 			prestat.setString(2, dto.geteMail());
-			prestat.setBoolean(3,dto.getIsAuthenticated());
+			prestat.setInt(3,dto.getIsAuthenticated());
 			prestat.setString(4,dto.getId());
 		
 			int cnt = prestat.executeUpdate();

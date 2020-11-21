@@ -20,34 +20,31 @@
     <title>yechan's</title>
     
     <style>
-    html, body
-    {
+    html, body    {
      min-width : 1024px;
     }
     
     
     body{
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
+	  -webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  background-size: cover;
+	  -o-background-size: cover;
     
     }
     
     .navbar{
-    
-    padding-left: 50px;
-    padding-right: 50px;
+	    padding-left: 50px;
+	    padding-right: 50px;
     }
-	
+    
+ 
     </style>
     
     
   </head>
-<body>
-
-
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="height:60px;">
   <!-- Brand -->
   <a class="navbar-brand" href="mainView.jsp">Home</a>
 
@@ -55,33 +52,48 @@
   <ul class="navbar-nav ">
   
     <li class = "nav-item">
-      <a class="nav-link" href="FboardView.jsp">자유게시판</a>
+      <a class="nav-link" href="boardListView.do?bType=1">자유게시판</a>
     </li>
 
 	<li class = "nav-item">
-      <a class="nav-link" href="AboardView.jsp">익명게시판</a>
+      <a class="nav-link" href="boardListView.do?bType=2">익명게시판</a>
     </li>
     
     <li class = "nav-item">
-      <a class="nav-link" href="MboardView.jsp">장터게시판</a>
+      <a class="nav-link" href="boardListView.do?bType=3">장터게시판</a>
     </li>
 	    
  
     <li class = "nav-item">
-      <a class="nav-link" href="timetableView.jsp">시간표</a>
+      <a class="nav-link" href="timetableView.do">시간표</a>
     </li>
     
+
     
+  
   </ul>
   
+  
+  
+  <div class="search-bar" >
+  	<ul style="    padding-inline-start: 20px;">
+	  <form  action="search.do">
+	  			<input  type="text"  name="pattern" style="margin-top:20px; border-radius: 5px; ">
+	  			<button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+		</form>	
+   </ul>
+  </div>
   
   <% if(name != null){ %>
 	<ul class = "navbar-nav ml-auto">	
 	<div class="btn-group">
 	<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><%= name%> 님</button>
 	<div class="dropdown-menu">
+      <a class="dropdown-item" href="message.do">쪽지함</a>
       <a class="dropdown-item" href="modify.do">회원정보 수정</a>
       <a class="dropdown-item" href="logout.do">로그아웃</a>
+      
+     
     </div>
     </div>
 	</ul>
@@ -96,6 +108,13 @@
 	%>
 	
 </nav>
+
+<body>
+
+
+
+
+
 
     	
 

@@ -23,13 +23,22 @@ public class boardInsertCommand implements Command {
 		
 		BoardDTO dto = new BoardDTO();
 		
+		
+		
 		String bId = request.getParameter("bId");
 		String bTitle = request.getParameter("bTitle");
 		String bContent = request.getParameter("bContent"); 
 		String bType = request.getParameter("bType");
 		String bImageUri = request.getParameter("bImageUri");
 		
+		dto.setbContent(bContent);
+		dto.setbId(bId);
+		dto.setbImageUri(bImageUri);
+		dto.setbTitle(bTitle);
+		dto.setbType(Integer.parseInt(bType));
+		
 		dao.InsertBoard(dto);
+		
 		
 	}
 }

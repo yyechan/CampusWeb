@@ -4,6 +4,7 @@
 
 <%
 	String name = (String) session.getAttribute("name");
+	String id = (String) session.getAttribute("id");
 %>
 
 <html>
@@ -112,9 +113,11 @@
   
 <body>
 
-<div class ="container">
+
+
+<div class ="container" style="padding : 50px;">
 	<div class="row">
-			<form action = "WriteOk" method = "post" style = "width : 100%">
+			<form action = "boardInsert.do" method = "post" style = "width : 100%">
 				<table class="table table-striped"
 					style="text-align: center; border: 1px solid #dddddd;">
 					<thead>
@@ -123,14 +126,9 @@
 								style="background-color: #eeeeee; text-align: center;">게시판
 								글쓰기</td>
 						</tr>
-						
 
 					</thead>
 					
-					
-
-
-	
 					<tbody>
 						<tr>
 							<td><input type="text" class="form-control"
@@ -151,6 +149,10 @@
 				
 				
 				<button type="submit" class="btn btn-secondary" style="float: right;">작성</button>
+				
+				<input type="hidden" name = "id" value = "<%=id%>"> 
+				<input type="hidden" name = "bType" value = "<%=request.getParameter("bType") %>">
+				
 				
 			</form>
 

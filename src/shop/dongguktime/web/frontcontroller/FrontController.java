@@ -75,16 +75,30 @@ public class FrontController extends HttpServlet {
 				break;
 			}
 			
-		}else if(context.equals("/search.do")) {
+		}else if(context.equals("/boardView.do")) {
+			
+			command = new boardViewCommand();
+			command.execute(request, response);
+			
+			viewPage = "boardView.jsp";
+			
+		}
+		
+		else if(context.equals("/search.do")) {
+			
 			command = new searchViewCommand();
 			command.execute(request, response);
 			
-			viewPage = "searchView.jsp";			
-		}else if(context.equals("/boardInsertView.do")) {
+			viewPage = "searchView.jsp";		
+			
+			
+		}else if(context.equals("/boardInsert.do")) {
+			
 			command = new boardInsertCommand();
-			
 			String type = request.getParameter("bType");
+			command.execute(request, response);
 			
+			viewPage = "boardListView.do";
 			
 		}
 		

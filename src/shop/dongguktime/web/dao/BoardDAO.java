@@ -51,11 +51,15 @@ public class BoardDAO {
 		
 		try
 		{
+			
+			
 			connection = dataSource.getConnection();
-
+			statement = connection.createStatement();
+			
 			String query = "select COUNT(bNum) as cnt, MAX(bNum) as max_num from board";
 			
 			resultSet = statement.executeQuery(query);
+			System.out.println("debug2");
 			
 			while(resultSet.next()){
 				
@@ -65,23 +69,24 @@ public class BoardDAO {
 			
 			bNum++;
 			
+			
 			query = "insert into board values (?,?,?,?,to_date(sysdate,'yyyy.mm.dd hh24:mi'),?,?)";
 			prestat = connection.prepareStatement(query);
+			
 			
 			prestat.setInt(1, bNum);
 			prestat.setString(2, dto.getbId());
 			prestat.setString(3, dto.getbTitle());
 			prestat.setString(4, dto.getbContent());
-			prestat.setInt(6, dto.getbType());
-			prestat.setString(7, dto.getbImageUri());
+			prestat.setInt(5, dto.getbType());
+			prestat.setString(6, dto.getbImageUri());
 			
 			prestat.executeUpdate();
 				
 			insertResult = true;
 			
 			
-		}catch(Exception e)
-		{
+		}catch(Exception e)	{
 			System.out.println(e.toString() + "insert 오류");
 		}
 		finally
@@ -109,9 +114,9 @@ public class BoardDAO {
 
 				connection = dataSource.getConnection();
 				String query = "select * from board where bType = ? order by bNum desc";
+				prestat = connection.prepareStatement(query);
 				prestat.setInt(1,bType);
 				
-				prestat = connection.prepareStatement(query);
 				resultSet = prestat.executeQuery();
 				
 				while (resultSet.next()) {

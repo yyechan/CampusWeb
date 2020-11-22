@@ -1,0 +1,16 @@
+create table members(
+id varchar2(20),
+pw varchar2(65),
+name varchar2(20),
+email varchar2(20),
+isauthenticated int);
+
+create table board(
+bNum int,
+bId varchar2(20),
+bTitle varchar2(50),
+bContent varchar2(2048 byte),
+bDate date,
+bType int,
+bImageUri varchar2(300)
+);

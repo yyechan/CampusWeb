@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 
 <%
@@ -52,20 +52,20 @@
   <ul class="navbar-nav ">
   
     <li class = "nav-item">
-      <a class="nav-link" href="boardListView.do?bType=1">�����Խ���</a>
+      <a class="nav-link" href="boardListView.do?bType=1">자유게시판</a>
     </li>
 
 	<li class = "nav-item">
-      <a class="nav-link" href="boardListView.do?bType=2">�͸��Խ���</a>
+      <a class="nav-link" href="boardListView.do?bType=2">익명게시판</a>
     </li>
     
     <li class = "nav-item">
-      <a class="nav-link" href="boardListView.do?bType=3">���ͰԽ���</a>
+      <a class="nav-link" href="boardListView.do?bType=3">장터게시판</a>
     </li>
 	    
  
     <li class = "nav-item">
-      <a class="nav-link" href="timetableView.do">�ð�ǥ</a>
+      <a class="nav-link" href="timetableView.do">시간표</a>
     </li>
     
 
@@ -87,11 +87,11 @@
   <% if(name != null){ %>
 	<ul class = "navbar-nav ml-auto">	
 	<div class="btn-group">
-	<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><%= name%> ��</button>
+	<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><%= name%> 님</button>
 	<div class="dropdown-menu">
-      <a class="dropdown-item" href="message.do">������</a>
-      <a class="dropdown-item" href="modify.do">ȸ������ ����</a>
-      <a class="dropdown-item" href="logout.do">�α׾ƿ�</a>
+      <a class="dropdown-item" href="message.do">쪽지함</a>
+      <a class="dropdown-item" href="modify.do">회원정보 수정</a>
+      <a class="dropdown-item" href="logout.do">로그아웃</a>
       
      
     </div>
@@ -112,7 +112,7 @@
   
 <body>
 
-��Ī
+서칭
     	
 
 </body>

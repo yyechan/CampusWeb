@@ -42,15 +42,12 @@ public class BoardDAO {
 	}
 	
 	
-	public boolean InsertBoard(BoardDTO dto)
-	{
+	public boolean InsertBoard(BoardDTO dto) {
 		boolean insertResult = false;
 		int bNum = 0;
 		
-		
-		
-		try
-		{
+				
+		try	{
 			
 			
 			connection = dataSource.getConnection();
@@ -59,7 +56,7 @@ public class BoardDAO {
 			String query = "select COUNT(bNum) as cnt, MAX(bNum) as max_num from board";
 			
 			resultSet = statement.executeQuery(query);
-			System.out.println("debug2");
+
 			
 			while(resultSet.next()){
 				
@@ -70,7 +67,7 @@ public class BoardDAO {
 			bNum++;
 			
 			
-			query = "insert into board values (?,?,?,?,to_date(sysdate,'yyyy.mm.dd hh24:mi'),?,?)";
+			query = "insert into board values (?,?,?,?,to_date(sysdate,'yy.mm.dd'),?,?)";
 			prestat = connection.prepareStatement(query);
 			
 			
@@ -150,8 +147,8 @@ public class BoardDAO {
 			return dtos;
 		}	
 	
-	public BoardDTO getBoardFrombNum(int bNum)
-	{
+	
+	public BoardDTO getBoardFrombNum(int bNum)	{
 		BoardDTO dto = new BoardDTO();
 		
 		try {
@@ -165,7 +162,7 @@ public class BoardDAO {
 			
 			if(resultSet.next())
 			{
-				dto.setbType(resultSet.getInt("setbType"));
+				dto.setbType(resultSet.getInt("bType"));
 				dto.setbContent(resultSet.getString("bContent"));
 				dto.setbDate(resultSet.getTimestamp("bDate"));
 				dto.setbId(resultSet.getString("bId"));

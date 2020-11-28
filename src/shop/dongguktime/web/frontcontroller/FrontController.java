@@ -36,7 +36,8 @@ public class FrontController extends HttpServlet {
 		
 		System.out.println("actionDo Method");
 		
-		response.setCharacterEncoding("EUC-KR");
+		request.setCharacterEncoding("UTF-8");	
+		response.setCharacterEncoding("UTF-8");
 		
 		String viewPage = null;
 		Command command = null;
@@ -96,16 +97,32 @@ public class FrontController extends HttpServlet {
 			
 			command = new boardInsertCommand();
 			String type = request.getParameter("bType");
+			
 			command.execute(request, response);
 			
 			viewPage = "boardListView.do";
+			
+		}else if(context.equals("/commentWrite.do")) {
+			
+			command = new commentWriteCommand();
+			
+			System.out.println(request.getParameter("cContent"));
+			
+			command.execute(request, response);
+			
+			
+			
+			viewPage = "boardView.jsp?bNum="+request.getParameter("bNum");
 			
 		}
 		
 		
 		
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
+		
+		return;
 		
 	}
 

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 
 <%
@@ -53,20 +53,20 @@
   <ul class="navbar-nav ">
   
     <li class = "nav-item">
-      <a class="nav-link" href="boardListView.do?bType=1">ÀÚÀ¯°Ô½ÃÆÇ</a>
+      <a class="nav-link" href="boardListView.do?bType=1">ìžìœ ê²Œì‹œíŒ</a>
     </li>
 
 	<li class = "nav-item">
-      <a class="nav-link" href="boardListView.do?bType=2">ÀÍ¸í°Ô½ÃÆÇ</a>
+      <a class="nav-link" href="boardListView.do?bType=2">ìµëª…ê²Œì‹œíŒ</a>
     </li>
     
     <li class = "nav-item">
-      <a class="nav-link" href="boardListView.do?bType=3">ÀåÅÍ°Ô½ÃÆÇ</a>
+      <a class="nav-link" href="boardListView.do?bType=3">ìž¥í„°ê²Œì‹œíŒ</a>
     </li>
 	    
  
     <li class = "nav-item">
-      <a class="nav-link" href="timetableView.do">½Ã°£Ç¥</a>
+      <a class="nav-link" href="timetableView.do">ì‹œê°„í‘œ</a>
     </li>
     
 
@@ -88,11 +88,11 @@
   <% if(name != null){ %>
 	<ul class = "navbar-nav ml-auto">	
 	<div class="btn-group">
-	<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><%= name%> ´Ô</button>
+	<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><%= name%> ë‹˜</button>
 	<div class="dropdown-menu">
-      <a class="dropdown-item" href="message.do">ÂÊÁöÇÔ</a>
-      <a class="dropdown-item" href="modify.do">È¸¿øÁ¤º¸ ¼öÁ¤</a>
-      <a class="dropdown-item" href="logout.do">·Î±×¾Æ¿ô</a>
+      <a class="dropdown-item" href="message.do">ìª½ì§€í•¨</a>
+      <a class="dropdown-item" href="modify.do">íšŒì›ì •ë³´ ìˆ˜ì •</a>
+      <a class="dropdown-item" href="logout.do">ë¡œê·¸ì•„ì›ƒ</a>
       
      
     </div>
@@ -123,8 +123,8 @@
 					<thead>
 						<tr>
 							<td colspan="2"
-								style="background-color: #eeeeee; text-align: center;">°Ô½ÃÆÇ
-								±Û¾²±â</td>
+								style="background-color: #eeeeee; text-align: center;">ê²Œì‹œíŒ
+								ê¸€ì“°ê¸°</td>
 						</tr>
 
 					</thead>
@@ -132,12 +132,12 @@
 					<tbody>
 						<tr>
 							<td><input type="text" class="form-control"
-								placeholder="±Û Á¦¸ñ" name="bTitle" maxlength="50" required></td>
+								placeholder="ê¸€ ì œëª©" name="bTitle" maxlength="50" required></td>
 						</tr>	
 						
 						<tr>	
 							<td><textarea type="text" class="form-control"
-									placeholder="±Û ³»¿ë" name="bContent" style="height : 350px;" required></textarea>
+									placeholder="ê¸€ ë‚´ìš©" name="bContent" style="height : 350px;" required></textarea>
 							</td>
 						</tr>
 
@@ -148,9 +148,9 @@
 				</table>
 				
 				
-				<button type="submit" class="btn btn-secondary" style="float: right;">ÀÛ¼º</button>
+				<button type="submit" class="btn btn-secondary" style="float: right;">ìž‘ì„±</button>
 				
-				<input type="hidden" name = "id" value = "<%=id%>"> 
+				<input type="hidden" name = "bId" value = "<%=id%>"> 
 				<input type="hidden" name = "bType" value = "<%=request.getParameter("bType") %>">
 				
 				

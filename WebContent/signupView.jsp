@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <!DOCTYPE html>
 <html>
@@ -21,36 +21,36 @@
 function infoConfirm()
 {
 	if(my_js.id.value.length == 0) 	{
-		alert("���̵�� �ʼ����� �Դϴ�.");
+		alert("아이디는 필수사항 입니다.");
 		my_js.id.focus();
 		return;
 	}
 	
 	if(my_js.id.value.length < 4) {
-		alert("���̵�� 4���� �̻��Դϴ�.");
+		alert("아이디는 4글자 이상입니다.");
 		my_js.id.focus();
 		return;	
 		}
 	if(my_js.pw.value.length == 0) 	{
-		alert("��й�ȣ�� �ʼ����� �Դϴ�.");
+		alert("비밀번호는 필수사항 입니다.");
 		my_js.pw.focus();
 		return;
 		}
 
 	if(my_js.pw.value != my_js.pw_check.value) {
-		alert("��й�ȣ�� �ٸ��ϴ�.");
+		alert("비밀번호가 다릅니다.");
 		my_js.pw_check.focus();
 		return;
 		}
 	
 	if(my_js.name.value.length == 0) {
-		alert("�̸��� �ʼ� �����Դϴ�.");
+		alert("이름은 필수 사항입니다.");
 		my_js.name.focus();
 		return;
 		}
 	
 	if(my_js.eMail.value.length == 0) 	{
-	alert("�̸����� �ʼ� �����Դϴ�.");
+	alert("이메일은 필수 사항입니다.");
 	my_js.eMail.focus();
 	return;
 	}
@@ -116,40 +116,40 @@ width : 300px;
 
 	
 	<div id="head">
-			<h1>ȸ�� ����</h1>
+			<h1>회원 가입</h1>
 		</div>
 
 <div class = "container"> 
 
 <form action="signup.do" class="was-validated" name ="my_js" method="post">
   <div class="form-group">
-    <label >���̵�:</label>
-    <input type="text" class="form-control" placeholder="���̵� �Է����ּ���" name="id" required>
+    <label >아이디:</label>
+    <input type="text" class="form-control" placeholder="아이디를 입력해주세요" name="id" required>
   </div>
   
   <div class="form-group">
-    <label for="pwd">��й�ȣ:</label>
-    <input type="password" class="form-control" id="pwd" placeholder="��й�ȣ�� �Է����ּ���" name="pw" required>
+    <label for="pwd">비밀번호:</label>
+    <input type="password" class="form-control" id="pwd" placeholder="비밀번호를 입력해주세요" name="pw" required>
   </div>
   
   <div class="form-group">
-  	<label>��й�ȣ Ȯ��:</label>
-  	<input type= "text" class="form-control" placeholder="��й�ȣ�� �Է����ּ���" name="pw_check" required>
+  	<label>비밀번호 확인:</label>
+  	<input type= "password" class="form-control" placeholder="비밀번호를 입력해주세요" name="pw_check" required>
   </div>
   
   <div class="form-group">
-  	<label>�̸�:</label>
-  	<input type= "text" class="form-control" placeholder="�̸��� �Է����ּ���" name="name" required>
+  	<label>이름:</label>
+  	<input type= "text" class="form-control" placeholder="이름을 입력해주세요" name="name" required>
   </div>
   
   <div class="form-group">
-  	<label>�̸���:</label>
-  	<input type= "text" class="form-control" placeholder="�̸����� �Է����ּ���" name="eMail" required>
+  	<label>이메일:</label>
+  	<input type= "text" class="form-control" placeholder="이메일을 입력해주세요" name="eMail" required>
   </div>
   
   
-  <button type ="button" class="btn btn-secondary" onclick="infoConfirm();">ȸ������</button>
-  <button type ="button" class="btn btn-secondary" onclick="history.back();">���</button>
+  <button type ="button" class="btn btn-secondary" onclick="infoConfirm();">회원가입</button>
+  <button type ="button" class="btn btn-secondary" onclick="history.back();">취소</button>
 </form>
 
 </div>

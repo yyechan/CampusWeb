@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <%
 	if (session.getAttribute("LoginSession") != null) {
 %>
-<jsp:forward page="index.jsp" />
+<jsp:forward page="mainView.jsp" />
 <%
 	}
 %>
@@ -91,7 +91,7 @@ margin: auto;
 
 
 		<div id="head">
-			<h1>�α���</h1>
+			<h1>로그인</h1>
 		</div>
 
 
@@ -100,22 +100,22 @@ margin: auto;
 
 			<form action="login.do" class="was-validated" method ="post">
 				<div class="form-group">
-					<label >���̵�:</label> 
+					<label >아이디:</label> 
 					<input type="text" class="form-control" placeholder="Enter username" name="id" required
 					value ="<%if (session.getAttribute("id") != null) out.println(session.getAttribute("id"));%>">
 					<div class="valid-feedback"></div>
-					<div class="invalid-feedback">���̵� �Է��� �ּ���.</div>
+					<div class="invalid-feedback">아이디를 입력해 주세요.</div>
 				</div>
 				<div class="form-group">
-					<label >��й�ȣ:</label>
+					<label >비밀번호:</label>
 					 <input type="password" class="form-control" placeholder="Enter password" name="pw" required>
 					<div class="valid-feedback"></div>
-					<div class="invalid-feedback">��й�ȣ�� �Է��� �ּ���.</div>
+					<div class="invalid-feedback">비밀번호를 입력해 주세요.</div>
 				</div>
 				
-				<button type="submit" class="btn btn-secondary">�α���</button> &nbsp;&nbsp;
+				<button type="submit" class="btn btn-secondary">로그인</button> &nbsp;&nbsp;
 		
-				<a href="signupView.jsp" class="btn btn-secondary" role="button">ȸ�� ����</a>
+				<a href="signupView.jsp" class="btn btn-secondary" role="button">회원 가입</a>
 			</form>
 
 

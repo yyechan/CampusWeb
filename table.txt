@@ -14,3 +14,10 @@ bDate date,
 bType int,
 bImageUri varchar2(300)
 );
+
+create table comments(
+bNum int,
+cId varchar2(20),
+cContent varchar2(2048 byte),
+cDate date
+)

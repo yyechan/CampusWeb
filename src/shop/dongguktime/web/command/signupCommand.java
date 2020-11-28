@@ -23,6 +23,7 @@ public class signupCommand implements Command {
 	
 	request.setCharacterEncoding("EUC-KR");
 	response.setCharacterEncoding("EUC-KR");
+	
 	PrintWriter out = response.getWriter();
 	
 	MemberDAO dao = MemberDAO.getInstance();
@@ -60,7 +61,7 @@ public class signupCommand implements Command {
 	else {
 		out.println("<script>");
 		out.println("alert('회원가입에 실패하였습니다.')");
-		out.println("location.href = 'join.html'");
+		out.println("location.href = 'loginView.jsp'");
 		out.println("</script>");
 		out.flush();
 	}

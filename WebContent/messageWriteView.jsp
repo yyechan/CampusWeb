@@ -1,11 +1,10 @@
-<%@page import="shop.dongguktime.web.dto.BoardDTO"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
 
 <%
 	String name = (String) session.getAttribute("name");
+	String id = (String) session.getAttribute("id");
 %>
 
 <html>
@@ -46,8 +45,7 @@
     
   </head>
   
-  
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="height:60px;">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="height:60px;">
   <!-- Brand -->
   <a class="navbar-brand" href="mainView.jsp">Home</a>
 
@@ -113,47 +111,63 @@
 </nav>
   
   
-  
 <body>
 
-	<div class ="container" style="padding:50px;">
-		<div class="row">
-			<table class="table" style="text-align: center
-			; border : 1px solid #dddddd ; border-radius : 30px;">
-			
-				<thead>
-					<tr class = "thead-light"style = "font-size : 0.8rem;">
-						<th style="background-color: #eeeeee; text-align:center;min-width:80px; width:80px; ">번호</th>
-						<th style="background-color: #eeeeee; text-align:left; ">제목</th>
-						<th style="background-color: #eeeeee; text-align:center; width : 100px">작성자</th>
-						<th style="background-color: #eeeeee; text-align:center; width : 100px;">작성일</th> 
-					</tr>
-				</thead>
-				
-				<tbody>
-					<%	
-						ArrayList<BoardDTO> dtos = (ArrayList<BoardDTO>)request.getAttribute("dtos");
-						for(int i = 0; i < dtos.size() ; i++){	
-					%>
+
+
+<div class ="container" style="padding : 50px;">
+	<div class="row">
+			<form action = "messageWrite.do" method = "post" style = "width : 100%">
+				<table class="table table-striped"
+					style="text-align: center; border: 1px solid #dddddd;">
+					<thead>
 						<tr>
-							<td style = "font-size : 0.8rem;"><%=dtos.size()-i%></td>
-							<td style = "text-align:left;"><a href="boardView.jsp?bNum=<%=dtos.get(i).getbNum()%>" style = "color:gray;">
-									<%=dtos.get(i).getbTitle()%></a>&nbsp;
-							</td>
-							<td style = "font-size : 0.8rem;"><%=dtos.get(i).getbId()%></td>
-							<td style = "font-size : 0.8rem;"><%=dtos.get(i).getbDate().getYear()+1900%>.<%=dtos.get(i).getbDate().getMonth()+1%>.<%=dtos.get(i).getbDate().getDate()%></td>
+							<td colspan="2"
+								style="background-color: #eeeeee; text-align: center;">쪽지 보내기</td>
 						</tr>
-					<% 
-						}
-					%>
+
+					</thead>
+					
+					<tbody>
+						<tr>
+							<td style="text-align:left;"> 받는 사람 : <%=request.getParameter("to") %>
+								</td>
+						</tr>	
+					
+						<tr>
+							<td><input type="text" class="form-control"
+								placeholder="제목" name="mTitle" maxlength="50" required></td>
+						</tr>	
 						
+						<tr>	
+							<td><textarea type="text" class="form-control"
+									placeholder="내용" name="mContent" style="height : 350px;" required></textarea>
+							</td>
+						</tr>
+
 					</tbody>
-			</table>
-			
-			<a href = "boardInsertView.jsp?bType=<%=request.getParameter("bType")%>" class ="btn btn-secondary ml-auto">글쓰기</a>
-			
+
+					
+
+				</table>
+				
+				
+				<button type="submit" class="btn btn-secondary" style="float: right;">작성</button>
+				
+				<input type="hidden" name = "mFrom" value = "<%=id%>"> 
+				<input type="hidden" name = "mTo" value = "<%=request.getParameter("to") %>">
+				
+				
+			</form>
+
+
+
 		</div>
-	</div>
+
+
+</div>
+
+
     	
 
 </body>

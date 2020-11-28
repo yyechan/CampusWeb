@@ -1,7 +1,7 @@
 <%@page import="shop.dongguktime.web.dto.BoardDTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 
 <%
@@ -54,20 +54,20 @@
   <ul class="navbar-nav ">
   
     <li class = "nav-item">
-      <a class="nav-link" href="boardListView.do?bType=1">ÀÚÀ¯°Ô½ÃÆÇ</a>
+      <a class="nav-link" href="boardListView.do?bType=1">ìžìœ ê²Œì‹œíŒ</a>
     </li>
 
 	<li class = "nav-item">
-      <a class="nav-link" href="boardListView.do?bType=2">ÀÍ¸í°Ô½ÃÆÇ</a>
+      <a class="nav-link" href="boardListView.do?bType=2">ìµëª…ê²Œì‹œíŒ</a>
     </li>
     
     <li class = "nav-item">
-      <a class="nav-link" href="boardListView.do?bType=3">ÀåÅÍ°Ô½ÃÆÇ</a>
+      <a class="nav-link" href="boardListView.do?bType=3">ìž¥í„°ê²Œì‹œíŒ</a>
     </li>
 	    
  
     <li class = "nav-item">
-      <a class="nav-link" href="timetableView.do">½Ã°£Ç¥</a>
+      <a class="nav-link" href="timetableView.do">ì‹œê°„í‘œ</a>
     </li>
     
 
@@ -89,11 +89,11 @@
   <% if(name != null){ %>
 	<ul class = "navbar-nav ml-auto">	
 	<div class="btn-group">
-	<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><%= name%> ´Ô</button>
+	<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><%= name%> ë‹˜</button>
 	<div class="dropdown-menu">
-      <a class="dropdown-item" href="message.do">ÂÊÁöÇÔ</a>
-      <a class="dropdown-item" href="modify.do">È¸¿øÁ¤º¸ ¼öÁ¤</a>
-      <a class="dropdown-item" href="logout.do">·Î±×¾Æ¿ô</a>
+      <a class="dropdown-item" href="message.do">ìª½ì§€í•¨</a>
+      <a class="dropdown-item" href="modify.do">íšŒì›ì •ë³´ ìˆ˜ì •</a>
+      <a class="dropdown-item" href="logout.do">ë¡œê·¸ì•„ì›ƒ</a>
       
      
     </div>
@@ -120,10 +120,10 @@
 		
 			<thead>
 				<tr class = "thead-light"style = "font-size : 0.8rem;">
-					<th style="background-color: #eeeeee; text-align:center;min-width:80px; width:80px; ">¹øÈ£</th>
-					<th style="background-color: #eeeeee; text-align:left; ">Á¦¸ñ</th>
-					<th style="background-color: #eeeeee; text-align:center; width : 100px">ÀÛ¼ºÀÚ</th>
-					<th style="background-color: #eeeeee; text-align:center; width : 100px;">ÀÛ¼ºÀÏ</th> 
+					<th style="background-color: #eeeeee; text-align:center;min-width:80px; width:80px; ">ë²ˆí˜¸</th>
+					<th style="background-color: #eeeeee; text-align:left; ">ì œëª©</th>
+					<th style="background-color: #eeeeee; text-align:center; width : 100px">ìž‘ì„±ìž</th>
+					<th style="background-color: #eeeeee; text-align:center; width : 100px;">ìž‘ì„±ì¼</th> 
 				</tr>
 			</thead>
 			
@@ -133,7 +133,7 @@
 					for(int i = 0; i < dtos.size() ; i++){	
 				%>
 					<tr>
-						<td style = "font-size : 0.8rem;"><%=dtos.get(i).getbNum()%></td>
+						<td style = "font-size : 0.8rem;"><%=dtos.size()-i%></td>
 						<td style = "text-align:left;"><a href="boardView.jsp?bNum=<%=dtos.get(i).getbNum()%>" style = "color:gray;">
 								<%=dtos.get(i).getbTitle()%></a>&nbsp;
 						</td>
@@ -148,7 +148,7 @@
 		</table>
 		
 		
-		<a href = "boardInsertView.jsp?bType=<%=request.getParameter("bType")%>" class ="btn btn-secondary ml-auto">±Û¾²±â</a>
+		<a href = "boardInsertView.jsp?bType=<%=request.getParameter("bType")%>" class ="btn btn-secondary ml-auto">ê¸€ì“°ê¸°</a>
 		
 	</div>
 </div>

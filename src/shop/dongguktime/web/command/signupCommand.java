@@ -20,10 +20,7 @@ public class signupCommand implements Command {
 @Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-	
-	request.setCharacterEncoding("EUC-KR");
-	response.setCharacterEncoding("EUC-KR");
-	
+
 	PrintWriter out = response.getWriter();
 	
 	MemberDAO dao = MemberDAO.getInstance();
@@ -32,13 +29,13 @@ public class signupCommand implements Command {
 	String pw = SHA256.encrypt(request.getParameter("pw"));
 	String name = request.getParameter("name");
 	String eMail = request.getParameter("eMail");
-	//String isAuthenticated = request.getParameter("isAuthenticated");
+
 	
 	
 	if(dao.isExistedId(id) == true ) 	{
 		out.println("<script>");
 		out.println("alert('이미 존재하는 아이디 입니다.')");
-		out.println("location.href = 'join.html'");
+		out.println("location.href = 'loginView.jsp'");
 		out.println("</script>");
 		out.flush();
 	}

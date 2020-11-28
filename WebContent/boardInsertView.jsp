@@ -39,6 +39,29 @@
 	    padding-right: 50px;
     }
     
+    
+   
+     .btn-file{
+            position: relative;
+            overflow: hidden;
+        }
+     .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+                right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: ;
+            cursor: inherit;
+            display: block;
+     }
+
+
  
     </style>
     
@@ -90,7 +113,7 @@
 	<div class="btn-group">
 	<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><%= name%> 님</button>
 	<div class="dropdown-menu">
-      <a class="dropdown-item" href="message.do">쪽지함</a>
+      <a class="dropdown-item" href="messageListView.jsp">쪽지함</a>
       <a class="dropdown-item" href="modify.do">회원정보 수정</a>
       <a class="dropdown-item" href="logout.do">로그아웃</a>
       
@@ -113,11 +136,13 @@
   
 <body>
 
-
+<%
+					request.setAttribute("bType", request.getParameter("bType"));
+				%>
 
 <div class ="container" style="padding : 50px;">
 	<div class="row">
-			<form action = "boardInsert.do" method = "post" style = "width : 100%">
+			<form action = "boardInsert.do" method = "post" style = "width : 100%" enctype="multipart/form-data">
 				<table class="table table-striped"
 					style="text-align: center; border: 1px solid #dddddd;">
 					<thead>
@@ -147,11 +172,27 @@
 
 				</table>
 				
-				
-				<button type="submit" class="btn btn-secondary" style="float: right;">작성</button>
+				<% 
+					if(request.getParameter("bType").equals("3")){
+				%>
+					<span class="btn btn-secondary btn-file">
+      					 파일추가 <input type="file" name ="file" >
+					</span>
+
+
+						
+				<%		
+					}
+				%>
 				
 				<input type="hidden" name = "bId" value = "<%=id%>"> 
 				<input type="hidden" name = "bType" value = "<%=request.getParameter("bType") %>">
+				
+				
+				
+				
+				<button type="submit" class="btn btn-secondary" style="float: right;">작성</button>
+				
 				
 				
 			</form>

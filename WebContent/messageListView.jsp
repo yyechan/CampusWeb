@@ -1,3 +1,5 @@
+<%@page import="shop.dongguktime.web.dto.MessageDTO"%>
+<%@page import="shop.dongguktime.web.dao.MessageDAO"%>
 <%@page import="shop.dongguktime.web.dto.BoardDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +8,7 @@
 
 <%
 	String name = (String) session.getAttribute("name");
+	String id = (String) session.getAttribute("id");
 %>
 
 <html>
@@ -42,6 +45,27 @@
     
  
     </style>
+    
+    
+    
+    <script>
+    
+     function contentClick(mNum){
+    	 
+    	 if($('#mContent'+mNum).css("display") == "none"){
+    		 $('#mContent'+mNum).show();
+    	 }else{
+    		 
+    		 $('#mContent'+mNum).hide();
+    	 }
+    	 
+    	 
+    	 
+
+    	 
+     };
+    
+    </script>
     
     
   </head>
@@ -91,7 +115,7 @@
 	<div class="btn-group">
 	<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><%= name%> 님</button>
 	<div class="dropdown-menu">
-      <a class="dropdown-item" href="message.do">쪽지함</a>
+      <a class="dropdown-item" href="messageListView.jsp">쪽지함</a>
       <a class="dropdown-item" href="modify.do">회원정보 수정</a>
       <a class="dropdown-item" href="logout.do">로그아웃</a>
       
@@ -115,6 +139,7 @@
 <body>
 
 
+
 <div class ="container" style="padding:50px;">
 	<div class="row">
 		<table class="table" style="text-align: center
@@ -123,33 +148,62 @@
 			<thead>
 				<tr class = "thead-light"style = "font-size : 0.8rem;">
 					<th style="background-color: #eeeeee; text-align:center;min-width:80px; width:80px; ">번호</th>
-					<th style="background-color: #eeeeee; text-align:left; ">제목</th>
-					<th style="background-color: #eeeeee; text-align:center; width : 100px">작성자</th>
-					<th style="background-color: #eeeeee; text-align:center; width : 100px;">작성일</th> 
+					<th style="background-color: #eeeeee; text-align:left; ">내용</th>
+					<th style="background-color: #eeeeee; text-align:center; width : 100px">보낸이</th>
+					
 				</tr>
 			</thead>
 			
 			<tbody>
 				<%	
-					ArrayList<BoardDTO> dtos = (ArrayList<BoardDTO>)request.getAttribute("dtos");
+					MessageDAO dao = MessageDAO.getInstance();
+					ArrayList<MessageDTO> dtos = dao.getMessages(id);
+					
 					for(int i = 0; i < dtos.size() ; i++){	
 				%>
 					<tr>
 						<td style = "font-size : 0.8rem;"><%=dtos.size()-i%></td>
-						<td style = "text-align:left;"><a href="boardView.jsp?bNum=<%=dtos.get(i).getbNum()%>" style = "color:gray;">
-								<%=dtos.get(i).getbTitle()%></a>&nbsp;
+						<td style = "text-align:left;"> <a href="#" style = "color:gray;" onclick="contentClick(<%=i %>);"> 
+						
+						<%
+						
+						  int strLength = dtos.get(i).getmContent().length();
+						
+							if(strLength < 10) {
+								
+						%>
+							<%=dtos.get(i).getmContent() %>
+						<% 
+								
+							}else{
+						%>
+								<%=dtos.get(i).getmContent().substring(0, 10)%>
+						<%
+							}
+						
+						%>
+						
+						</a>&nbsp;
 						</td>
-						<td style = "font-size : 0.8rem;">익명</td>
-						<td style = "font-size : 0.8rem;"><%=dtos.get(i).getbDate().getYear()+1900%>.<%=dtos.get(i).getbDate().getMonth()+1%>.<%=dtos.get(i).getbDate().getDate()%></td>
+						<td style = "font-size : 0.8rem;"><%=dtos.get(i).getmFromId()%></td>
 					</tr>
+					
+					<% String mId = "mContent" + i;%>
+					
+					<tr>
+						<td  id="<%=mId %>" colspan="3" style="display:none;">
+							<%=dtos.get(i).getmContent() %>
+						</td>
+					</tr>
+					
+					
+					
 				<% 
 					}
 				%>
 					
 				</tbody>
 		</table>
-		
-		<a href = "boardInsertView.jsp?bType=<%=request.getParameter("bType")%>" class ="btn btn-secondary ml-auto">글쓰기</a>
 	</div>
 </div>
 

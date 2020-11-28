@@ -38,6 +38,8 @@ public class FrontController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");	
 		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+
 		
 		String viewPage = null;
 		Command command = null;
@@ -96,23 +98,27 @@ public class FrontController extends HttpServlet {
 		}else if(context.equals("/boardInsert.do")) {
 			
 			command = new boardInsertCommand();
-			String type = request.getParameter("bType");
-			
+				
 			command.execute(request, response);
 			
-			viewPage = "boardListView.do";
+			String type = (String)request.getAttribute("bType");
+			
+			viewPage = "mainView.jsp";
+			
+			
 			
 		}else if(context.equals("/commentWrite.do")) {
 			
 			command = new commentWriteCommand();
-			
-			System.out.println(request.getParameter("cContent"));
-			
 			command.execute(request, response);
-			
-			
-			
 			viewPage = "boardView.jsp?bNum="+request.getParameter("bNum");
+			
+		}else if(context.equals("/messageWrite.do")) {
+			
+			command = new messageWriteCommand();
+			command.execute(request,response);
+			
+			viewPage = "mainView.jsp";
 			
 		}
 		

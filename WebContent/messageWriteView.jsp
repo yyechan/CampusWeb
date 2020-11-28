@@ -90,7 +90,7 @@
 	<div class="btn-group">
 	<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><%= name%> 님</button>
 	<div class="dropdown-menu">
-      <a class="dropdown-item" href="message.do">쪽지함</a>
+      <a class="dropdown-item" href="messageListView.jsp">쪽지함</a>
       <a class="dropdown-item" href="modify.do">회원정보 수정</a>
       <a class="dropdown-item" href="logout.do">로그아웃</a>
       
@@ -133,11 +133,7 @@
 							<td style="text-align:left;"> 받는 사람 : <%=request.getParameter("to") %>
 								</td>
 						</tr>	
-					
-						<tr>
-							<td><input type="text" class="form-control"
-								placeholder="제목" name="mTitle" maxlength="50" required></td>
-						</tr>	
+				
 						
 						<tr>	
 							<td><textarea type="text" class="form-control"
@@ -154,8 +150,8 @@
 				
 				<button type="submit" class="btn btn-secondary" style="float: right;">작성</button>
 				
-				<input type="hidden" name = "mFrom" value = "<%=id%>"> 
-				<input type="hidden" name = "mTo" value = "<%=request.getParameter("to") %>">
+				<input type="hidden" name = "mFromId" value = "<%=id%>"> 
+				<input type="hidden" name = "mToId" value = "<%=request.getParameter("to") %>">
 				
 				
 			</form>

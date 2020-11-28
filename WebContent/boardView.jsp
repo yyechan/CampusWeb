@@ -108,7 +108,7 @@
 	<div class="btn-group">
 	<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><%= name%> 님</button>
 	<div class="dropdown-menu">
-      <a class="dropdown-item" href="message.do">쪽지함</a>
+      <a class="dropdown-item" href="messageListView.jsp">쪽지함</a>
       <a class="dropdown-item" href="modify.do">회원정보 수정</a>
       <a class="dropdown-item" href="logout.do">로그아웃</a>
       
@@ -166,6 +166,18 @@
 						<tr>
 							<td colspan = "3" style = "min-height : 200px; text-align : left; padding : 50px">
 								<%=dto.getbContent().replaceAll(" ","&nbsp;").replaceAll("<", "&lt;").replaceAll("\n","<br>") %>
+								
+								
+								<%
+								if(dto.getbType() != 3)
+								{
+								
+								}else {
+							 %><div style="padding-top:50px">
+								<img alt="" src="<%=dto.getbImageUri() %>" width="300" height="300">
+								</div> <%
+							 }%>
+								
 							</td>
 						
 						</tr>

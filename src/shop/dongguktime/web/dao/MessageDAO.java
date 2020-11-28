@@ -65,13 +65,14 @@ private static MessageDAO dao = new MessageDAO();
 			statement = connection.createStatement();
 			
 			String query = "select COUNT(mNum) as cnt, MAX(mNum) as max_num from message where mToId = ? and mFromId = ?";
+			
 			prestat = connection.prepareStatement(query);
 			
 			prestat.setString(1, mToId);
 			prestat.setString(2, mFromId);
 		
 			
-			resultSet = prestat.executeQuery(query);
+			resultSet = prestat.executeQuery();
 
 			
 			while(resultSet.next()){
@@ -126,7 +127,7 @@ private static MessageDAO dao = new MessageDAO();
 		try {
 
 			connection = dataSource.getConnection();
-			String query = "select * from message where mToId = ? order by mNum desc";
+			String query = "select * from message where mToId = ? order by mNum asc";
 			prestat = connection.prepareStatement(query);
 			prestat.setString(1,mToId);
 			
@@ -163,7 +164,49 @@ private static MessageDAO dao = new MessageDAO();
 	}	
 	
 	
-	
+	public MessageDTO getMessage(String mToId, String mFromId,int mNum) {
+		
+		MessageDTO dto = new MessageDTO();
+
+		try {
+
+			connection = dataSource.getConnection();
+			String query = "select * from message where mNum = ? and mToId = ? and mFrom Id = ? order by mNum desc";
+			prestat = connection.prepareStatement(query);
+			prestat.setInt(1,mNum);
+			prestat.setString(2,mToId);
+			prestat.setString(3, mFromId);
+			
+			resultSet = prestat.executeQuery();
+			
+			if(resultSet.next()) {
+				
+				dto.setmNum(resultSet.getInt(1));
+				dto.setmToId(resultSet.getString(2));
+				dto.setmFromId(resultSet.getString(3));		
+				dto.setmContent(resultSet.getString(4));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.toString()+"get message 오류");
+		} finally {
+			try {
+				if (!connection.isClosed())
+					connection.close();
+				if (!prestat.isClosed())
+					prestat.close();
+				if (!resultSet.isClosed())
+					resultSet.close();
+			} catch (Exception e) {
+				System.out.println(e.toString()+ "get message finally");
+			}
+		}
+		
+		return dto;
+		
+		
+	}
 	
 	
 	

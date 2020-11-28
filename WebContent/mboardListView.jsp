@@ -92,7 +92,7 @@
 	<div class="btn-group">
 	<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><%= name%> 님</button>
 	<div class="dropdown-menu">
-      <a class="dropdown-item" href="message.do">쪽지함</a>
+      <a class="dropdown-item" href="messageListView.jsp">쪽지함</a>
       <a class="dropdown-item" href="modify.do">회원정보 수정</a>
       <a class="dropdown-item" href="logout.do">로그아웃</a>
       
@@ -125,8 +125,10 @@
 					<tr class = "thead-light"style = "font-size : 0.8rem;">
 						<th style="background-color: #eeeeee; text-align:center;min-width:80px; width:80px; ">번호</th>
 						<th style="background-color: #eeeeee; text-align:left; ">제목</th>
+						<th style="background-color: #eeeeee; text-align:center; width : 100px;"></th> 
 						<th style="background-color: #eeeeee; text-align:center; width : 100px">작성자</th>
-						<th style="background-color: #eeeeee; text-align:center; width : 100px;">작성일</th> 
+						<th style="background-color: #eeeeee; text-align:center; width : 100px;">작성일</th>
+						
 					</tr>
 				</thead>
 				
@@ -140,8 +142,10 @@
 							<td style = "text-align:left;"><a href="boardView.jsp?bNum=<%=dtos.get(i).getbNum()%>" style = "color:gray;">
 									<%=dtos.get(i).getbTitle()%></a>&nbsp;
 							</td>
+							<td><img alt="" src="<%=dtos.get(i).getbImageUri() %>" width="100" height="100"></td>
 							<td style = "font-size : 0.8rem;"><%=dtos.get(i).getbId()%></td>
 							<td style = "font-size : 0.8rem;"><%=dtos.get(i).getbDate().getYear()+1900%>.<%=dtos.get(i).getbDate().getMonth()+1%>.<%=dtos.get(i).getbDate().getDate()%></td>
+							
 						</tr>
 					<% 
 						}

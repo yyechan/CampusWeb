@@ -10,11 +10,13 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import shop.dongguktime.web.dto.BoardDTO;
+import shop.dongguktime.web.dto.ClassDTO;
 import shop.dongguktime.web.dto.TimeTableDTO;
 
 public class TimeTableDAO {
 
-	
+
 	private static TimeTableDAO dao = new TimeTableDAO();
 	
 
@@ -22,6 +24,7 @@ public class TimeTableDAO {
 	private Connection connection;
 	private Statement statement;
 	private ResultSet resultSet;
+	private PreparedStatement prestat;
 	
 	
 	private TimeTableDAO() {
@@ -39,39 +42,31 @@ public class TimeTableDAO {
 		return dao;
 	}
 	
-	public ArrayList<TimeTableDTO> getTimeTables(String keywords) {
+	
+	public ArrayList<TimeTableDTO> getTimeTableFromId(String userId) {
 		
 		ArrayList<TimeTableDTO> dtos = new ArrayList<TimeTableDTO>();
-		
-		keywords = keywords.trim();
 		
 		try {
 			
 			connection = dataSource.getConnection();
 			statement = connection.createStatement();
+			
 			String query; 
 			
-			if(keywords=="") {
-				query = "select * from timetable";
-			}else {
-				query = "select * from timetable where className = '" + keywords + "'";
-			}
-			resultSet = statement.executeQuery(query);
+			query = "select * from timetable where userId = '" + userId + "'";
 			
+			resultSet = statement.executeQuery(query);
 			
 			while(resultSet.next()) {
 				
-				String courseNum = resultSet.getString("classId");
-				String courseName = resultSet.getString("className");
-				String courseTime = resultSet.getString("dayOfWeekTime");
-				String courseLecturer = resultSet.getString("professorName");
-				String courseLocation = resultSet.getString("classLocation");
-				int courseScore = resultSet.getInt("classScore");
+				String timetableName = resultSet.getString("timetableName");
+		
+				String classId = resultSet.getString("classId");
 				
-				TimeTableDTO dto = new TimeTableDTO(courseNum, courseName, courseTime, courseLecturer, courseLocation, courseScore);
-				
+				TimeTableDTO dto = new TimeTableDTO(timetableName,userId,classId);
+
 				dtos.add(dto);
-				
 			}
 		
 		}catch(Exception e) {
@@ -90,8 +85,58 @@ public class TimeTableDAO {
 			}
 		}
 		
-		
 		return dtos;
+		
 	}
 	
+	public void timetableInsert(TimeTableDTO dto) {
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	public boolean isExistedTitle (String title,String userId) {
+			
+			boolean duplication = false;
+			
+			try {
+				
+				connection = dataSource.getConnection();
+				statement = connection.createStatement();
+				String query = "select timetableName from timetable where timetableName = '" + title + "' and userId = '" + userId + "'" ;
+				resultSet = statement.executeQuery(query);
+				
+				if(resultSet.next()) 
+					duplication = true;
+				else 
+					duplication = false;
+					
+			}catch (Exception e) {
+				System.out.println(e.toString());
+			}finally {
+				
+				try {
+					if(!connection.isClosed()) connection.close();
+					if(!statement.isClosed()) statement.close();
+					if(!resultSet.isClosed()) resultSet.close();
+				}
+				catch(Exception e) {
+					System.out.println(e.toString());
+				}	
+			}
+			
+			
+			return duplication;
+		}
+
+	
+	
+	
+	
+	
+
 }

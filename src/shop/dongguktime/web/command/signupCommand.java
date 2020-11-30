@@ -54,7 +54,7 @@ public class signupCommand implements Command {
 		out.println("location.href = 'loginView.jsp'");
 		out.println("</script>");
 		out.flush();
-	}
+	}2
 	else {
 		out.println("<script>");
 		out.println("alert('회원가입에 실패하였습니다.')");

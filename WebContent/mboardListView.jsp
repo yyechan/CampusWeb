@@ -93,7 +93,6 @@
 	<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><%= name%> 님</button>
 	<div class="dropdown-menu">
       <a class="dropdown-item" href="messageListView.jsp">쪽지함</a>
-      <a class="dropdown-item" href="modify.do">회원정보 수정</a>
       <a class="dropdown-item" href="logout.do">로그아웃</a>
       
      

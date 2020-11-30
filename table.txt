@@ -19,5 +19,46 @@ create table comments(
 bNum int,
 cId varchar2(20),
 cContent varchar2(2048 byte),
-cDate date
+cDate varchar2(30)
 )
+
+
+create table message(
+mNum int,
+mToId varchar2(20),
+mFromId varchar2(20),
+mContent varchar2(2048 byte)
+)
+
+
+create table timetable(
+timetableName varchar2(20),
+userId varchar2(20), 
+classId varchar2(2048 byte)
+)
+
+create table class(
+classId varchar2(20),
+className varchar2(50),
+professorName varchar2(20),
+classLocation varchar2(200),
+classDay varchar2(10),
+startTime varchar2(20),
+endTime varchar2(20),
+classScore int 
+)
+
+
+
+insert into class values ( 'CSE2013-01', '시스템소프트웨어와실습', '문봉교', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'MON', '7.0', '8.5', '3' ); 
+insert into class values ( 'CSE2013-01', '시스템소프트웨어와실습', '문봉교', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'FRI', '8.0', '9.5', '3' ); 
+insert into class values ( 'CSE2013-02', '시스템소프트웨어와실습', '안영아', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'TUE', '2.0', '3.5', '3' ); 
+insert into class values ( 'CSE2013-02', '시스템소프트웨어와실습', '안영아', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'FRI', '6.0', '7.5', '3' ); 
+insert into class values ( 'CSE2013-03', '시스템소프트웨어와실습', '엄진영', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'TUE', '7.0', '8.5', '3' ); 
+insert into class values ( 'CSE2013-03', '시스템소프트웨어와실습', '엄진영', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'FRI', '2.0', '3.5', '3' ); 
+
+
+
+
+
+

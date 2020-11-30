@@ -120,6 +120,22 @@ public class FrontController extends HttpServlet {
 			
 			viewPage = "mainView.jsp";
 			
+		}else if(context.equals("/timetableView.do")) {
+			
+			command = new timetableViewCommand();
+			command.execute(request, response);
+			
+			
+			viewPage = "timetableView.jsp";
+			
+		}else if (context.equals("/timetableInsert.do")) {
+			
+			
+			command = new timetableInsertCommand();
+			command.execute(request,response);
+			
+			
+			viewPage = "timetableView.do";
 		}
 		
 		

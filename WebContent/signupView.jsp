@@ -111,7 +111,7 @@ width : 300px;
 
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 		<!-- Brand -->
-		<a class="navbar-brand" href="index.jsp">Home</a>
+		<a class="navbar-brand" href="mainView.jsp">Home</a>
 	</nav>
 
 	

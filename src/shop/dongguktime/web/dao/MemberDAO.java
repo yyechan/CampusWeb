@@ -148,6 +148,7 @@ public class MemberDAO {
 		finally	{
 			
 			try {
+				
 				if(!prestat.isClosed()) prestat.close();
 				if(!connection.isClosed()) connection.close();
 			}

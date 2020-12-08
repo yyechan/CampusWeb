@@ -93,7 +93,35 @@ public class TimeTableDAO {
 		
 		
 		
+		try
+		{
+			connection = dataSource.getConnection();
+			String query = "insert into timetable values (?,?,?)";
+			prestat = connection.prepareStatement(query);
+			
+			prestat.setString(1, dto.getTimeTableName());
+			prestat.setString(2, dto.getUserId());
+			prestat.setString(3, dto.getClassId());
+
 		
+			prestat.executeUpdate();
+			
+			
+		}catch(Exception e)		{
+			
+			System.out.println(e.toString());
+			
+		}
+		finally	{
+			
+			try {
+				if(!prestat.isClosed()) prestat.close();
+				if(!connection.isClosed()) connection.close();
+			}
+			catch(Exception e) {
+				System.out.println(e.toString());
+			}
+		}
 		
 		
 	}

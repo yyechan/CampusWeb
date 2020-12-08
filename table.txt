@@ -32,7 +32,7 @@ mContent varchar2(2048 byte)
 
 
 create table timetable(
-timetableName varchar2(20),
+timetableName varchar2(100),
 userId varchar2(20), 
 classId varchar2(2048 byte)
 )
@@ -58,7 +58,7 @@ insert into class values ( 'CSE2013-03', '시스템소프트웨어와실습', '�
 insert into class values ( 'CSE2013-03', '시스템소프트웨어와실습', '엄진영', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'FRI', '2.0', '3.5', '3' ); 
 
 
-
+insert into timetable values ( '첫번째 시간표', 'baries', 'CSE2013-01,CSE2013-03');
 
 
 

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.naming.Context;
@@ -67,7 +68,7 @@ public class BoardDAO {
 			bNum++;
 			
 			
-			query = "insert into board values (?,?,?,?,to_date(sysdate,'yy.mm.dd'),?,?)";
+			query = "insert into board values (?,?,?,?,?,?,?)";
 			prestat = connection.prepareStatement(query);
 			
 			
@@ -75,8 +76,9 @@ public class BoardDAO {
 			prestat.setString(2, dto.getbId());
 			prestat.setString(3, dto.getbTitle());
 			prestat.setString(4, dto.getbContent());
-			prestat.setInt(5, dto.getbType());
-			prestat.setString(6, dto.getbImageUri());
+			prestat.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
+			prestat.setInt(6, dto.getbType());
+			prestat.setString(7, dto.getbImageUri());
 			
 			prestat.executeUpdate();
 				

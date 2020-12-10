@@ -129,7 +129,7 @@
 						</td>
 						<td style = "font-size : 0.8rem;"><%=dtos.get(i).getbId()%></td>
 						<td style = "font-size : 0.8rem;"><%=dtos.get(i).getbDate().getYear()+1900%>.<%=dtos.get(i).getbDate().getMonth()+1%>.<%=dtos.get(i).getbDate().getDate()%></td>
-					</tr>
+					</tr>	
 				<% 
 					}
 				%>

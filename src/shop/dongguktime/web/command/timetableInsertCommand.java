@@ -104,8 +104,16 @@ public class timetableInsertCommand implements Command {
 		
 		tdao.timetableInsert(new TimeTableDTO(title,(String)session.getAttribute("id"),str));
 		
+		out.println("<script>");
+		out.println("location.href = 'timetableView.do'");
+		out.println("</script>");
+		out.flush();
+		
+		
+		
 		out.close();
 		
+		return;
 
 	}
 

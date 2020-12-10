@@ -134,17 +134,15 @@ public class FrontController extends HttpServlet {
 			command = new timetableInsertCommand();
 			command.execute(request,response);
 			
-			
-			viewPage = "timetableView.do";
+			viewPage = "index.jsp";
 		}
 		
 		
-		
-		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
-		dispatcher.forward(request, response);
+		dispatcher.include(request, response);
 		
 		return;
+		
 		
 	}
 

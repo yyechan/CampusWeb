@@ -19,7 +19,7 @@ public class boardInsertCommand implements Command {
 		// TODO Auto-generated method stub
 
 		int size = 1024*1024*10;
-		String savePath = request.getServletContext().getRealPath("image");
+		String savePath = "/home/ubuntu/image";
 		MultipartRequest multi = new MultipartRequest(request,savePath,size, "UTF-8",new DefaultFileRenamePolicy());
 		
 			
@@ -38,7 +38,7 @@ public class boardInsertCommand implements Command {
 		
 			
 			String fileName = multi.getFilesystemName("file");
-			bImageUri = savePath + "/" + fileName;
+			bImageUri = "http://3.35.229.237:8080/image/" + fileName;
 
 		}
 		

@@ -44,11 +44,14 @@ public class loginCommand implements Command {
 				session.setAttribute("pw", dto.getPw());
 				session.setAttribute("name",dto.getName());
 				session.setAttribute("LoginSession",1);
-				loginResult = 1;
+				
+				out.println("<script>");
+				out.println("location.href = 'index.jsp'");
+				out.println("</script>");
+				out.flush();
 		}
 		
-		if(loginResult == 0)
-		{
+		if(loginResult == 0) {
 			out.println("<script>");
 			out.println("alert('아이디 또는 비밀번호를 확인해 주세요.')");
 			out.println("location.href = 'loginView.jsp'");

@@ -20,7 +20,7 @@ public class boardInsertCommand implements Command {
 
 		int size = 1024*1024*10;
 		String savePath = request.getServletContext().getRealPath("image");
-		MultipartRequest multi = new MultipartRequest(request,savePath,size, "ksc5601",new DefaultFileRenamePolicy());
+		MultipartRequest multi = new MultipartRequest(request,savePath,size, "UTF-8",new DefaultFileRenamePolicy());
 		
 			
 				

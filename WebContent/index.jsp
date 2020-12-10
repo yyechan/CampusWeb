@@ -1,3 +1,6 @@
+<%@page import="shop.dongguktime.web.dao.BoardDAO"%>
+<%@page import="shop.dongguktime.web.dto.BoardDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
@@ -24,6 +27,12 @@
      min-width : 1024px;
     }
     
+    .container {
+    	
+    	align-items: center;
+    	
+    }
+    
     
     body{
 	  -webkit-background-size: cover;
@@ -38,7 +47,35 @@
 	    padding-right: 50px;
     }
     
+    .leftparentbox {
+    	
+    	float : left;
+    	width : 500px;
+    }
+    
+ 	.leftbox, .rightbox {
  
+ 		border-radius: 3px;
+ 		border : solid black 1px;
+ 		min-width : 450px;
+ 		height : 240px;
+ 		margin : 30px;
+ 		
+ 		
+ 	}
+ 	
+ 	.marketbox {
+ 	
+ 		float : left;
+ 		border-radius: 3px;
+ 		border : solid black 1px;
+ 		width : 450px;
+ 		margin : 30px;
+ 	}
+ 	
+ 	.leftboxtop, .rightboxtop , .marketboxtop {
+ 		background-color: gray;
+ 	}	
     </style>
     
     
@@ -46,7 +83,7 @@
   
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="height:60px;">
   <!-- Brand -->
-  <a class="navbar-brand" href="mainView.jsp">Home</a>
+  <a class="navbar-brand" href="index.jsp">Home</a>
 
   <!-- Links -->
   <ul class="navbar-nav ">
@@ -104,11 +141,83 @@
 <body>
 
 	
+<div class= "container">
 
+	<div class ="leftparentbox">
+	
+		<div class ="leftbox">
+		
+			<div class = "leftboxtop"> &nbsp 자유게시판 최신글  </div>
+			
+					<%	
+						BoardDAO dao = BoardDAO.getInstance();
+						ArrayList<BoardDTO> dtos = dao.getBoardsFromType(1);
+						int dSize = dtos.size() < 10 ? dtos.size() : 9;
+						for(int i = 0; i < dSize ; i++){	
+					%>
+						<div>
+							<a href="boardView.jsp?bNum=<%=dtos.get(i).getbNum()%>" style = "color:gray;">
+									&nbsp &nbsp<%=dtos.get(i).getbTitle()%></a>&nbsp
+						</div>
+					<% 
+						}
+					%>
+		
+		</div>
+		
+	
+		<div class = "rightbox">
+			<div class = "leftboxtop"> 익명게시판 최신글  </div>
+			
+			
+					<%	
+						dtos = dao.getBoardsFromType(2);
+						dSize = dtos.size() < 10 ? dtos.size() : 9;	
+						for(int i = 0; i < dSize ; i++){	
+					%>
+						<div>
+							<a href="boardView.jsp?bNum=<%=dtos.get(i).getbNum()%>" style = "color:gray;">
+									&nbsp &nbsp<%=dtos.get(i).getbTitle()%></a>&nbsp
+						</div>
+					<% 
+						}
+					%>
+		
+		</div>
 
-
-
+	</div>
+	
+	<div class = "marketbox">
+		
+		
+				<div class = "marketboxtop"> 장터게시판 최신글 </div>
+							
+								<%	
+									dtos = dao.getBoardsFromType(3);
+									dSize = dtos.size() < 6 ? dtos.size() : 5;	
+									for(int i = 0; i < dtos.size() ; i++){	
+								%>
+										<div style = "margin : 10px;">
+										
+											<img alt="" src="<%=dtos.get(i).getbImageUri() %>" width="100" height="100">
+											
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											
+											<a href="boardView.jsp?bNum=<%=dtos.get(i).getbNum()%>" style = "color:gray;">
+												&nbsp;&nbsp;<%=dtos.get(i).getbTitle()%></a>&nbsp;
+										
+											
+										</div>
+								<% 
+									}
+								%>
+						
+					
+							
+	</div>
+	
     	
+</div>
 
 </body>
 </html>

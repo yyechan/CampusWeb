@@ -4,7 +4,7 @@
 <%
 	if (session.getAttribute("LoginSession") != null) {
 %>
-<jsp:forward page="mainView.jsp" />
+<jsp:forward page="index.jsp" />
 <%
 	}
 %>
@@ -81,7 +81,7 @@ margin: auto;
 
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
-		<a class="navbar-brand" href="mainView.jsp">Home</a>
+		<a class="navbar-brand" href="index.jsp">Home</a>
 
 	</nav>
 

@@ -72,7 +72,7 @@
   
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="height:60px;">
   <!-- Brand -->
-  <a class="navbar-brand" href="mainView.jsp">Home</a>
+  <a class="navbar-brand" href="index.jsp">Home</a>
 
   <!-- Links -->
   <ul class="navbar-nav ">

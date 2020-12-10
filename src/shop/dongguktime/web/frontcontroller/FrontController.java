@@ -51,15 +51,15 @@ public class FrontController extends HttpServlet {
 		if(context.equals("/login.do")) {
 			command = new loginCommand();
 			command.execute(request, response);
-			viewPage = "mainView.jsp";
+			viewPage = "index.jsp";
 		}else if(context.equals("/logout.do")) {
 			command = new logoutCommand();
 			command.execute(request, response);
-			viewPage = "mainView.jsp";
+			viewPage = "index.jsp";
 		}else if(context.equals("/signup.do")) {
 			command = new signupCommand();
 			command.execute(request, response);
-			viewPage = "mainView.jsp";
+			viewPage = "index.jsp";
 		}else if(context.equals("/boardListView.do")) {
 			command = new boardListViewCommand();
 			command.execute(request, response);
@@ -103,7 +103,7 @@ public class FrontController extends HttpServlet {
 			
 			String type = (String)request.getAttribute("bType");
 			
-			viewPage = "mainView.jsp";
+			viewPage = "index.jsp";
 			
 			
 			
@@ -118,7 +118,7 @@ public class FrontController extends HttpServlet {
 			command = new messageWriteCommand();
 			command.execute(request,response);
 			
-			viewPage = "mainView.jsp";
+			viewPage = "index.jsp";
 			
 		}else if(context.equals("/timetableView.do")) {
 			

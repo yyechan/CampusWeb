@@ -85,15 +85,7 @@
   </ul>
   
   
-  
-  <div class="search-bar" >
-  	<ul style="    padding-inline-start: 20px;">
-	  <form  action="search.do">
-	  			<input  type="text"  name="pattern" style="margin-top:20px; border-radius: 5px; ">
-	  			<button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
-		</form>	
-   </ul>
-  </div>
+
   
   <% if(name != null){ %>
 	<ul class = "navbar-nav ml-auto">	

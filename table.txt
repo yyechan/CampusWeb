@@ -20,7 +20,7 @@ bNum int,
 cId varchar2(20),
 cContent varchar2(2048 byte),
 cDate varchar2(30)
-)
+);
 
 
 create table message(
@@ -28,14 +28,14 @@ mNum int,
 mToId varchar2(20),
 mFromId varchar2(20),
 mContent varchar2(2048 byte)
-)
+);
 
 
 create table timetable(
 timetableName varchar2(100),
 userId varchar2(20), 
 classId varchar2(2048 byte)
-)
+);
 
 create table class(
 classId varchar2(20),
@@ -46,7 +46,7 @@ classDay varchar2(10),
 startTime varchar2(20),
 endTime varchar2(20),
 classScore int 
-)
+);
 
 
 

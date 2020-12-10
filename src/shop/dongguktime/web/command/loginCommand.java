@@ -57,5 +57,9 @@ public class loginCommand implements Command {
 			
 		}
 		
+		out.close();
+		
+		return;
+		
 	}
 }

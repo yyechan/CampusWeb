@@ -104,7 +104,7 @@ public class timetableInsertCommand implements Command {
 		
 		tdao.timetableInsert(new TimeTableDTO(title,(String)session.getAttribute("id"),str));
 		
-		
+		out.close();
 		
 
 	}

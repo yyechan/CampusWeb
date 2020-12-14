@@ -1,2 +1,2 @@
 # CampusWeb
-Web Programming Campus Community 
+Campus Community 

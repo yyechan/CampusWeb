@@ -25,7 +25,6 @@ public class loginCommand implements Command {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		
-		pw = SHA256.encrypt(pw);
 		
 		MemberDAO dao = MemberDAO.getInstance();
 		MemberDTO dto = dao.getMembersFromId(id);

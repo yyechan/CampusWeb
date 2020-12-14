@@ -1,5 +1,6 @@
 package shop.dongguktime.web.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +22,7 @@ public class MemberDAO {
 	private Statement statement;
 	private ResultSet resultSet;
 	private PreparedStatement prestat;
+	private CallableStatement cstmt;
 	
 	
 	private MemberDAO() {
@@ -118,27 +120,27 @@ public class MemberDAO {
 		return dto;
 	}
 	
-	public boolean InsertMembers(MemberDTO dto) {
+	public String InsertMembers(MemberDTO dto) {
 		
-		boolean insertResult = false;
+		String result ="";
 		
 		
-		try
-		{
+		try	{
+			
+			
 			connection = dataSource.getConnection();
-			String query = "insert into members values (?,?,?,?,?)";
-			prestat = connection.prepareStatement(query);
+			cstmt = connection.prepareCall( "{call InsertMember(?,?,?,?,?,?)");
 			
-			prestat.setString(1, dto.getId());
-			prestat.setString(2, dto.getPw());
-			prestat.setString(3, dto.getName());
-			prestat.setString(4, dto.geteMail());
-			prestat.setInt(5, dto.getIsAuthenticated());
-		
-			prestat.executeUpdate();
+			cstmt.setString(1, dto.getId());
+			cstmt.setString(2, dto.getPw());
+			cstmt.setString(3, dto.getName());
+			cstmt.setString(4, dto.geteMail());
+			cstmt.setInt(5, dto.getIsAuthenticated());
+			cstmt.registerOutParameter(6, java.sql.Types.VARCHAR);
 			
-			insertResult = true;
+			cstmt.execute();
 			
+			result = cstmt.getString(6);
 			
 		}catch(Exception e)		{
 			
@@ -158,7 +160,7 @@ public class MemberDAO {
 		}
 		
 		
-		return insertResult;
+		return result;
 		
 	}
 	

@@ -18,11 +18,11 @@ public class boardInsertCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+
 		int size = 1024*1024*10;
-		String savePath = "/home/ubuntu/image";
+		String savePath = request.getServletContext().getRealPath("image");
 		MultipartRequest multi = new MultipartRequest(request,savePath,size, "UTF-8",new DefaultFileRenamePolicy());
 		
-			
 				
 		BoardDAO dao = BoardDAO.getInstance();
 		
@@ -38,7 +38,7 @@ public class boardInsertCommand implements Command {
 		
 			
 			String fileName = multi.getFilesystemName("file");
-			bImageUri = "http://3.35.229.237:8080/image/" + fileName;
+			bImageUri = savePath + "/" + fileName;
 
 		}
 		
@@ -50,6 +50,7 @@ public class boardInsertCommand implements Command {
 		dto.setbType(Integer.parseInt(bType));
 		
 		dao.InsertBoard(dto);
+		
 		
 	
 	}

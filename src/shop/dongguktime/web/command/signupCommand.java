@@ -26,7 +26,7 @@ public class signupCommand implements Command {
 	MemberDAO dao = MemberDAO.getInstance();
 	
 	String id = request.getParameter("id");
-	String pw = SHA256.encrypt(request.getParameter("pw"));
+	String pw = request.getParameter("pw");
 	String name = request.getParameter("name");
 	String eMail = request.getParameter("eMail");
 
@@ -42,26 +42,14 @@ public class signupCommand implements Command {
 	
 	
 	MemberDTO dto = new MemberDTO(id,pw,name,eMail,0);
-	boolean insertResult = dao.InsertMembers(dto);
+	String message = dao.InsertMembers(dto);
 	
 
-	if( insertResult == true) {
-
 		out.println("<script>");
-		out.println("alert('회원가입이 완료되었습니다.')");
-		HttpSession session = request.getSession();
-		session.setAttribute("id", id);			
+		out.println("alert('"+message+"')");
 		out.println("location.href = 'loginView.jsp'");
 		out.println("</script>");
 		out.flush();
-	}
-	else {
-		out.println("<script>");
-		out.println("alert('회원가입에 실패하였습니다.')");
-		out.println("location.href = 'loginView.jsp'");
-		out.println("</script>");
-		out.flush();
-	}
 	
 	
 	out.close();

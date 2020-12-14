@@ -1,3 +1,11 @@
+
+DROP TABLE members CASCADE CONSTRAINTS;  
+DROP TABLE board CASCADE CONSTRAINTS;  
+DROP TABLE comments CASCADE CONSTRAINTS;  
+DROP TABLE message CASCADE CONSTRAINTS;  
+DROP TABLE timetable CASCADE CONSTRAINTS;  
+DROP TABLE class CASCADE CONSTRAINTS;  
+
 create table members(
 id varchar2(20),
 pw varchar2(65),
@@ -48,17 +56,211 @@ endTime varchar2(20),
 classScore int 
 );
 
+CREATE OR REPLACE PROCEDURE INSERTMEMBER
+(v_id IN VARCHAR2,
+v_pw IN VARCHAR2,
+v_name IN VARCHAR2,
+v_email IN VARCHAR2,
+v_authen IN NUMBER,
+result OUT VARCHAR2
+)
+
+IS
+    invalid_complex EXCEPTION;
+    underflow_length EXCEPTION;
+    invalid_value EXCEPTION;    
 
 
-insert into class values ( 'CSE2013-01', '시스템소프트웨어와실습', '문봉교', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'MON', '7.0', '8.5', '3' ); 
-insert into class values ( 'CSE2013-01', '시스템소프트웨어와실습', '문봉교', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'FRI', '8.0', '9.5', '3' ); 
-insert into class values ( 'CSE2013-02', '시스템소프트웨어와실습', '안영아', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'TUE', '2.0', '3.5', '3' ); 
-insert into class values ( 'CSE2013-02', '시스템소프트웨어와실습', '안영아', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'FRI', '6.0', '7.5', '3' ); 
-insert into class values ( 'CSE2013-03', '시스템소프트웨어와실습', '엄진영', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'TUE', '7.0', '8.5', '3' ); 
-insert into class values ( 'CSE2013-03', '시스템소프트웨어와실습', '엄진영', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'FRI', '2.0', '3.5', '3' ); 
+    nLength NUMBER;
+    nBlank NUMBER;
+    nCharcter NUMBER;
+    nNumber NUMBER;
+
+BEGIN
+
+    SELECT REGEXP_instr(v_pw,'[a-z]|[A-Z]'), REGEXP_instr(v_pw,'[0-9]')
+    INTO nCharcter, nNumber
+    FROM DUAL;
+
+    SELECT length(v_pw), instr(v_pw,' ')
+    INTO nLength, nBlank
+    FROM DUAL;
+
+    IF (nCharcter = 0 or nNumber = 0 ) THEN
+        RAISE invalid_complex;
+    ELSIF (nLength < 4) THEN
+        RAISE underflow_length;
+    ELSIF (nBlank > 0) THEN
+        RAISE invalid_value;
+    END IF;
 
 
-insert into timetable values ( '첫번째 시간표', 'baries', 'CSE2013-01,CSE2013-03');
+
+    insert into MEMBERS 
+        values (v_id,v_pw,v_name,v_email,v_authen);
+
+
+    result := '등록 완료';
+ 
+EXCEPTION
+    WHEN invalid_complex THEN
+        result := '패스워드는 문자와 순자를 조합해야 합니다.';
+    WHEN underflow_length THEN
+         result := '암호는 4자리 이상이어야 합니다';
+    WHEN invalid_value THEN 
+         result := '암호에 공란은 입력되지 않습니다.';
+
+
+END;
+/
+
+
+
+insert into class values ('CSE2013-01', '시스템소프트웨어와실습', '문봉교', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'MON', '7.0', '8.5', '3'); 
+insert into class values ('CSE2013-01', '시스템소프트웨어와실습', '문봉교', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'FRI', '8.0', '9.5', '3');
+insert into class values ('CSE2013-02', '시스템소프트웨어와실습', '안영아', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'TUE', '2.0', '3.5', '3');
+insert into class values ('CSE2013-02', '시스템소프트웨어와실습', '안영아', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'FRI', '6.0', '7.5', '3');
+insert into class values ('CSE2013-03', '시스템소프트웨어와실습', '엄진영', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'TUE', '7.0', '8.5', '3');
+insert into class values ('CSE2013-03', '시스템소프트웨어와실습', '엄진영', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'FRI', '2.0', '3.5', '3');
+insert into class values ('CSE2014-01', '기초프로그래밍', '김경자', '401-3183(신공학관(기숙사) 3183 컴퓨터공학 실습실2)', 'TUE', '7.0', '8.5', '3');
+insert into class values ('CSE2014-01', '기초프로그래밍', '김경자', '401-3183(신공학관(기숙사) 3183 컴퓨터공학 실습실2)', 'THU', '2.0', '3.5', '3');
+insert into class values ('CSE2014-02', '기초프로그래밍', '김신우', '401-3182(신공학관(기숙사) 3182 컴퓨터공학 실습실3)', 'MON', '5.0', '6.5', '3');
+insert into class values ('CSE2014-02', '기초프로그래밍', '김신우', '401-3182(신공학관(기숙사) 3182 컴퓨터공학 실습실3)', 'THU', '7.0', '8.5', '3');
+insert into class values ('CSE2015-01', '웹프로그래밍', '송양의', '401-3183(신공학관(기숙사) 3183 컴퓨터공학 실습실2)', 'TUE', '2.0', '3.5', '3');
+insert into class values ('CSE2015-01', '웹프로그래밍', '송양의', '401-3183(신공학관(기숙사) 3183 컴퓨터공학 실습실2)', 'FRI', '5.0', '6.5', '3');
+insert into class values ('CSE2015-02', '웹프로그래밍', '송양의', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'TUE', '5.0', '6.5', '3');
+insert into class values ('CSE2015-02', '웹프로그래밍', '송양의', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'THU', '8.5', '10.0', '3');
+insert into class values ('CSE2015-03', '웹프로그래밍', '김신우', '401-3183(신공학관(기숙사) 3183 컴퓨터공학 실습실2)', 'MON', '9.0', '10.5', '3');
+insert into class values ('CSE2015-03', '웹프로그래밍', '김신우', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'THU', '2.0', '3.5', '3');
+insert into class values ('CSE2016-01', '창의적공학설계', '정진우', '401-3142(신공학관(기숙사) 3142 기초설계실습실)', 'TUE', '5.0', '6.5', '3');
+insert into class values ('CSE2016-01', '창의적공학설계', '정진우', '401-3142(신공학관(기숙사) 3142 기초설계실습실)', 'THU', '5.0', '6.5', '3');
+insert into class values ('CSE2016-02', '창의적공학설계', '신연순', '401-3142(신공학관(기숙사) 3142 기초설계실습실)', 'MON', '7.0', '8.5', '3');
+insert into class values ('CSE2016-02', '창의적공학설계', '신연순', '401-3142(신공학관(기숙사) 3142 기초설계실습실)', 'WED', '7.0', '8.5', '3');
+insert into class values ('CSE2017-01', '자료구조와실습', '최은만', '401-6144(신공학관(기숙사) 6144 강의실)', 'WED', '2.0', '3.5', '3');
+insert into class values ('CSE2017-01', '자료구조와실습', '최은만', '401-3183(신공학관(기숙사) 3183 컴퓨터공학 실습실2)', 'THU', '6.5', '8.0', '3');
+insert into class values ('CSE2017-02', '자료구조와실습', '이호정', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'MON', '9.0', '10.5', '3');
+insert into class values ('CSE2017-02', '자료구조와실습', '이호정', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'WED', '7.0', '8.5', '3');
+insert into class values ('CSE2022-01', '심화프로그래밍', '윤성림', '401-3182(신공학관(기숙사) 3182 컴퓨터공학 실습실3)', 'MON', '2.0', '3.5', '3');
+insert into class values ('CSE2022-01', '심화프로그래밍', '윤성림', '401-3182(신공학관(기숙사) 3182 컴퓨터공학 실습실3)', 'WED', '5.0', '6.5', '3');
+insert into class values ('CSE2022-02', '심화프로그래밍', '김가영', '401-3182(신공학관(기숙사) 3182 컴퓨터공학 실습실3)', 'WED', '2.0', '3.5', '3');
+insert into class values ('CSE2022-02', '심화프로그래밍', '김가영', '401-3182(신공학관(기숙사) 3182 컴퓨터공학 실습실3)', 'FRI', '2.0', '3.5', '3');
+insert into class values ('CSE2024-01', '프로그래밍언어', '손윤식', '401-6144(신공학관(기숙사) 6144 강의실)', 'MON', '2.5', '3.5', '3');
+insert into class values ('CSE2024-01', '프로그래밍언어', '손윤식', '401-6144(신공학관(기숙사) 6144 강의실)', 'WED', '6.5', '7.5', '3');
+insert into class values ('CSE2024-02', '프로그래밍언어', '주해종', '401-6144(신공학관(기숙사) 6144 강의실)', 'TUE', '9.0', '10.0', '3');
+insert into class values ('CSE2024-02', '프로그래밍언어', '주해종', '401-5145(신공학관(기숙사) 5145 강의실)', 'THU', '9.0', '10.0', '3');
+insert into class values ('CSE2025-01', '계산적사고법', '김가영', '401-5145(신공학관(기숙사) 5145 강의실)', 'TUE', '5.0', '6.0', '3');
+insert into class values ('CSE2025-01', '계산적사고법', '김가영', '401-6144(신공학관(기숙사) 6144 강의실)', 'THU', '5.0', '6.0', '3');
+insert into class values ('CSE2026-01', '이산구조', '주태우', '401-6144(신공학관(기숙사) 6144 강의실)', 'TUE', '1.0', '2.0', '3');
+insert into class values ('CSE2026-01', '이산구조', '주태우', '401-5145(신공학관(기숙사) 5145 강의실)', 'FRI', '5.0', '6.0', '3');
+insert into class values ('CSE2026-02', '이산구조', '주태우', '401-5145(신공학관(기숙사) 5145 강의실)', 'WED', '7.0', '8.0', '3');
+insert into class values ('CSE2026-02', '이산구조', '주태우', '401-5145(신공학관(기숙사) 5145 강의실)', 'FRI', '6.5', '7.5', '3');
+insert into class values ('CSE2027-01', '객체지향프로그래밍', '이호정', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'MON', '5.0', '6.5', '3');
+insert into class values ('CSE2027-01', '객체지향프로그래밍', '이호정', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'WED', '2.0', '3.5', '3');
+insert into class values ('CSE2027-02', '객체지향프로그래밍', '엄진영', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'TUE', '9.0', '10.5', '3');
+insert into class values ('CSE2027-02', '객체지향프로그래밍', '엄진영', '401-6119(신공학관(기숙사) 6119 컴퓨터공학 실습실1(ESC4))', 'WED', '9.0', '10.5', '3');
+insert into class values ('DES2001-01', '커리어멘토링', '이재훈', '401-6141(신공학관(기숙사) 6141 강의실)', 'TUE', '9.0', '11.5', '3');
+insert into class values ('DES2001-02', '커리어멘토링', '김삼동', '401-5141(신공학관(기숙사) 5141 강의실)', 'TUE', '9.0', '11.5', '3');
+insert into class values ('DES2001-03', '커리어멘토링', '윤병운', '405-450(원흥관 1,3 E450 강의실)', 'TUE', '9.0', '11.5', '3');
+insert into class values ('CSE4034-01', '컴퓨터구조', '장태무', '401-5145(신공학관(기숙사) 5145 강의실)', 'MON', '2.5', '3.5', '3');
+insert into class values ('CSE4034-01', '컴퓨터구조', '장태무', '401-5145(신공학관(기숙사) 5145 강의실)', 'WED', '5.5', '6.5', '3');
+insert into class values ('CSE4034-02', '컴퓨터구조', '장태무', '401-5145(신공학관(기숙사) 5145 강의실)', 'MON', '5.5', '6.5', '3');
+insert into class values ('CSE4034-02', '컴퓨터구조', '장태무', '401-5145(신공학관(기숙사) 5145 강의실)', 'WED', '2.5', '3.5', '3');
+insert into class values ('CSE4035-01', '컴파일러구성', '손윤식', '401-6144(신공학관(기숙사) 6144 강의실)', 'MON', '9.5', '10.5', '3');
+insert into class values ('CSE4035-01', '컴파일러구성', '손윤식', '401-6144(신공학관(기숙사) 6144 강의실)', 'FRI', '2.5', '3.5', '3');
+insert into class values ('CSE4036-01', '인공지능', '김준태', '401-6144(신공학관(기숙사) 6144 강의실)', 'TUE', '7.0', '8.0', '3');
+insert into class values ('CSE4036-01', '인공지능', '김준태', '401-6144(신공학관(기숙사) 6144 강의실)', 'THU', '9.0', '10.0', '3');
+insert into class values ('CSE4036-02', '인공지능', '김준태', '401-5145(신공학관(기숙사) 5145 강의실)', 'TUE', '9.0', '10.0', '3');
+insert into class values ('CSE4036-02', '인공지능', '김준태', '401-5145(신공학관(기숙사) 5145 강의실)', 'THU', '7.0', '8.0', '3');
+insert into class values ('CSE4038-01', '데이터통신입문', '안종석', '401-6144(신공학관(기숙사) 6144 강의실)', 'TUE', '2.5', '3.5', '3');
+insert into class values ('CSE4038-01', '데이터통신입문', '안종석', '401-6144(신공학관(기숙사) 6144 강의실)', 'THU', '7.0', '8.0', '3');
+insert into class values ('CSE4038-02', '데이터통신입문', '안종석', '401-5145(신공학관(기숙사) 5145 강의실)', 'TUE', '7.0', '8.0', '3');
+insert into class values ('CSE4038-02', '데이터통신입문', '안종석', '401-5145(신공학관(기숙사) 5145 강의실)', 'THU', '2.5', '3.5', '3');
+insert into class values ('CSE4053-01', '모바일컴퓨팅', '문봉교', '401-5145(신공학관(기숙사) 5145 강의실)', 'MON', '9.0', '10.0', '3');
+insert into class values ('CSE4053-01', '모바일컴퓨팅', '문봉교', '401-5145(신공학관(기숙사) 5145 강의실)', 'WED', '9.0', '10.0', '3');
+insert into class values ('CSE4058-01', '소프트웨어공학개론', '최은만', '401-5145(신공학관(기숙사) 5145 강의실)', 'TUE', '2.0', '3.0', '3');
+insert into class values ('CSE4058-01', '소프트웨어공학개론', '최은만', '401-5145(신공학관(기숙사) 5145 강의실)', 'THU', '5.0', '6.0', '3');
+insert into class values ('CSE4058-02', '소프트웨어공학개론', '최은만', '401-6144(신공학관(기숙사) 6144 강의실)', 'TUE', '5.0', '6.0', '3');
+insert into class values ('CSE4058-02', '소프트웨어공학개론', '최은만', '401-6144(신공학관(기숙사) 6144 강의실)', 'THU', '2.0', '3.0', '3');
+insert into class values ('CSE4066-01', '컴퓨터종합설계1', '김동호', '407-207(정보문화관P P402 강의실)', 'MON', '9.0', '10.0', '3');
+insert into class values ('CSE4066-01', '컴퓨터종합설계1', '김동호', '407-207(정보문화관P P402 강의실)', 'FRI', '8.0', '9.5', '3');
+insert into class values ('CSE4067-01', '컴퓨터종합설계2', '주종화', '401-10144(신공학관(기숙사) 10144 컴퓨터공학과 세미나실2)', 'MON', '7.0', '8.5', '3');
+insert into class values ('CSE4067-01', '컴퓨터종합설계2', '주종화', '401-10144(신공학관(기숙사) 10144 컴퓨터공학과 세미나실2)', 'FRI', '8.0', '9.5', '3');
+insert into class values ('CSE4067-02', '컴퓨터종합설계2', '안종석', '401-3182(신공학관(기숙사) 3182 컴퓨터공학 실습실3)', 'TUE', '9.0', '10.5', '3');
+insert into class values ('CSE4067-02', '컴퓨터종합설계2', '안종석', '401-3182(신공학관(기숙사) 3182 컴퓨터공학 실습실3)', 'FRI', '8.0', '9.5', '3');
+insert into class values ('CSE4067-03', '컴퓨터종합설계2', '손윤식', '401-3182(신공학관(기숙사) 3182 컴퓨터공학 실습실3)', 'WED', '9.0', '10.5', '3');
+insert into class values ('CSE4067-03', '컴퓨터종합설계2', '손윤식', '401-3183(신공학관(기숙사) 3183 컴퓨터공학 실습실2)', 'FRI', '8.0', '9.5', '3');
+insert into class values ('CSE4067-04', '컴퓨터종합설계2', '정진우', '401-6144(신공학관(기숙사) 6144 강의실)', 'WED', '9.0', '10.5', '3');
+insert into class values ('CSE4067-04', '컴퓨터종합설계2', '정진우', '401-10144(신공학관(기숙사) 10144 컴퓨터공학과 세미나실2)', 'FRI', '8.0', '9.5', '3');
+insert into class values ('CSE4070-01', '임베디드소프트웨어입문', '이강우', '401-6144(신공학관(기숙사) 6144 강의실)', 'MON', '7.5', '9.0', '3');
+insert into class values ('CSE4070-01', '임베디드소프트웨어입문', '이강우', '401-3183(신공학관(기숙사) 3183 컴퓨터공학 실습실2)', 'WED', '9.0', '10.5', '3');
+insert into class values ('CSE4074-01', '공개SW프로젝트', '손윤식', '401-3182(신공학관(기숙사) 3182 컴퓨터공학 실습실3)', 'MON', '7.0', '8.5', '3');
+insert into class values ('CSE4074-01', '공개SW프로젝트', '손윤식', '401-3182(신공학관(기숙사) 3182 컴퓨터공학 실습실3)', 'TUE', '5.0', '6.5', '3');
+insert into class values ('CSE4075-01', 'SW비즈니스와창업', '박대한', '401-10144(신공학관(기숙사) 10144 컴퓨터공학과 세미나실2)', 'TUE', '7.0', '9.5', '3');
+insert into class values ('CSE4076-01', '테크니컬프리젠테이션', '주종화', '401-10144(신공학관(기숙사) 10144 컴퓨터공학과 세미나실2)', 'MON', '2.0', '3.5', '3');
+insert into class values ('CSE4076-01', '테크니컬프리젠테이션', '주종화', '401-10144(신공학관(기숙사) 10144 컴퓨터공학과 세미나실2)', 'WED', '2.0', '3.5', '3');
+insert into class values ('CSE4081-01', '암호학과네트워크보안', '문봉교', '401-6144(신공학관(기숙사) 6144 강의실)', 'MON', '5.0', '6.0', '3');
+insert into class values ('CSE4081-01', '암호학과네트워크보안', '문봉교', '401-6144(신공학관(기숙사) 6144 강의실)', 'FRI', '5.0', '6.0', '3');
+insert into class values ('CSE4082-01', '데이터분석 및 실습', '주종화', '401-3183(신공학관(기숙사) 3183 컴퓨터공학 실습실2)', 'MON', '5.0', '6.5', '3');
+insert into class values ('CSE4082-01', '데이터분석 및 실습', '주종화', '401-3183(신공학관(기숙사) 3183 컴퓨터공학 실습실2)', 'MON', '5.0', '6.5', '3');
+
+
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (1,'baries','test1','test1',to_date('10/12/20','RR/MM/DD'),1,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (2,'baries','test2','test2',to_date('10/12/20','RR/MM/DD'),1,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (3,'baries','test3','test3',to_date('10/12/20','RR/MM/DD'),1,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (4,'baries','test4','test4',to_date('10/12/20','RR/MM/DD'),1,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (5,'baries','test5','test5',to_date('10/12/20','RR/MM/DD'),1,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (6,'baries','test6','test6',to_date('10/12/20','RR/MM/DD'),1,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (7,'baries','test7','test7',to_date('10/12/20','RR/MM/DD'),1,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (8,'baries','웹프로그래밍','웹프',to_date('10/12/20','RR/MM/DD'),1,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (12,'baries','수학의 정석 팝니다 ','오백원에 급처',to_date('10/12/20','RR/MM/DD'),3,'http://3.35.229.237:8080/image/99.JPG');
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (10,'baries','옷 팔아요','싸게팔아요 쪽지 ㄱㄱ',to_date('10/12/20','RR/MM/DD'),3,'http://3.35.229.237:8080/image/das.JPG');
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (11,'baries','웹관련 책팝니다','팝니다',to_date('10/12/20','RR/MM/DD'),3,'http://3.35.229.237:8080/image/1231234.JPG');
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (13,'baries','여자 옷 팝니다','한번도 안 입어봤어요',to_date('10/12/20','RR/MM/DD'),3,'http://3.35.229.237:8080/image/123123.JPG');
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (14,'baries','아 종강 언제하냐','테스트',to_date('10/12/20','RR/MM/DD'),2,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (15,'baries','웹프로그래밍 너무 유익해','ㅇㅇ',to_date('10/12/20','RR/MM/DD'),1,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (16,'baries','코로나 빨리 종식됐으면','좋겠어',to_date('10/12/20','RR/MM/DD'),2,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (9,'baries','고양이','양이',to_date('10/12/20','RR/MM/DD'),3,'http://3.35.229.237:8080/image/11.png');
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (17,'testuser','익명게시판','안녕',to_date('10/12/20','RR/MM/DD'),2,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (18,'testuser','아자아ㅏㅈ','파이팅',to_date('10/12/20','RR/MM/DD'),1,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (19,'testuser','지금 몇시지..','제발 ㅠ_ㅠ',to_date('10/12/20','RR/MM/DD'),1,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (20,'testuser','으아악','아악',to_date('10/12/20','RR/MM/DD'),2,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (21,'testuser','다시','다시',to_date('10/12/20','RR/MM/DD'),1,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (22,'testuser','얍','얍',to_date('20/12/10','RR/MM/DD'),1,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (23,'test1','hello','world',to_date('20/12/11','RR/MM/DD'),1,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (24,'test1','hello','world',to_date('20/12/11','RR/MM/DD'),2,null);
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (25,'test1','hello','world',to_date('20/12/11','RR/MM/DD'),3,'http://3.35.229.237:8080/image/file-20170822-30538-gebk45.jpg');
+Insert into BOARD (BNUM,BID,BTITLE,BCONTENT,BDATE,BTYPE,BIMAGEURI) values (26,'test2','둘리','얍',to_date('20/12/11','RR/MM/DD'),1,null);
+
+Insert into COMMENTS (BNUM,CID,CCONTENT,CDATE) values (13,'baries','얼마죠?','2020.12.10 18:11:52');
+Insert into COMMENTS (BNUM,CID,CCONTENT,CDATE) values (15,'testuser','asd','2020.12.10 18:31:50');
+Insert into COMMENTS (BNUM,CID,CCONTENT,CDATE) values (14,'hyjoo67','그러게','2020.12.10 19:12:10');
+Insert into COMMENTS (BNUM,CID,CCONTENT,CDATE) values (15,'hyjoo67','너무 유익해~~','2020.12.10 19:12:38');
+Insert into COMMENTS (BNUM,CID,CCONTENT,CDATE) values (9,'yours','동이 너무 귀여워','2020.12.10 19:17:05');
+Insert into COMMENTS (BNUM,CID,CCONTENT,CDATE) values (15,'qweqwe0504','asdfsdfsdaf','2020.12.10 20:28:12');
+Insert into COMMENTS (BNUM,CID,CCONTENT,CDATE) values (25,'test1','cute cat','2020.12.11 02:31:59');
+Insert into COMMENTS (BNUM,CID,CCONTENT,CDATE) values (26,'test1','GG','2020.12.11 08:31:52');
+Insert into COMMENTS (BNUM,CID,CCONTENT,CDATE) values (26,'test2','dd','2020.12.11 10:57:38');
+
+
+Insert into MEMBERS (ID,PW,NAME,EMAIL,ISAUTHENTICATED) values ('baries','1234','조예찬','yyechan@naver.com',0);
+Insert into MEMBERS (ID,PW,NAME,EMAIL,ISAUTHENTICATED) values ('testuser','1234','테스트','test@test.test',0);
+Insert into MEMBERS (ID,PW,NAME,EMAIL,ISAUTHENTICATED) values ('hyjoo67','1234','영주','hyjoo67@naver.com',0);
+Insert into MEMBERS (ID,PW,NAME,EMAIL,ISAUTHENTICATED) values ('yours','1234','yours','ff',0);
+Insert into MEMBERS (ID,PW,NAME,EMAIL,ISAUTHENTICATED) values ('qweqwe0504','1234','강건우','qweqwe0504@naver.com',0);
+Insert into MEMBERS (ID,PW,NAME,EMAIL,ISAUTHENTICATED) values ('test1','1234','홍','길동',0);
+Insert into MEMBERS (ID,PW,NAME,EMAIL,ISAUTHENTICATED) values ('test2','1234','고길동','gogildong@gmail.com',0);
+Insert into MEMBERS (ID,PW,NAME,EMAIL,ISAUTHENTICATED) values ('aaaaa','1234','테스트','aaa@naver.com',0);
+
+Insert into TIMETABLE (TIMETABLENAME,USERID,CLASSID) values ('2학년 2학기','baries','CSE4034-01,CSE4036-02,CSE2015-01,CSE4066-01,');
+Insert into TIMETABLE (TIMETABLENAME,USERID,CLASSID) values ('test','testuser','CSE2015-01,CSE4066-01,CSE4036-02,CSE4034-01,');
+Insert into TIMETABLE (TIMETABLENAME,USERID,CLASSID) values ('test','baries','CSE2013-01,');
+Insert into TIMETABLE (TIMETABLENAME,USERID,CLASSID) values ('시간표 이름','qweqwe0504','CSE2013-02,CSE2013-01,CSE2013-03,');
+Insert into TIMETABLE (TIMETABLENAME,USERID,CLASSID) values ('1','test1','CSE2013-01,CSE2015-01,CSE2017-01,CSE2025-01,');
+Insert into TIMETABLE (TIMETABLENAME,USERID,CLASSID) values ('2','test1','CSE2013-03,CSE2016-01,');
+Insert into TIMETABLE (TIMETABLENAME,USERID,CLASSID) values ('시간표 이름','test1','CSE2013-02,CSE2013-03,');
+Insert into TIMETABLE (TIMETABLENAME,USERID,CLASSID) values ('시간표 이름','aaaaa','CSE2013-01,');
+Insert into TIMETABLE (TIMETABLENAME,USERID,CLASSID) values ('시간표 이름sad','aaaaa','CSE2013-01,CSE2013-03,CSE2014-02,');
+
 
 
 
